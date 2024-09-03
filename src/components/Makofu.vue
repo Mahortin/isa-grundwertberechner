@@ -14,50 +14,49 @@ const verborgenesErkennen = ref(Math.round((mut.value + klugheit.value + intuiti
 const weisheit = ref(klugheit.value - mut.value)
 
 const attributes = reactive([
-  {name: 'Mut', shortName: 'MU', value: 8},
-  {name: 'Klugheit', shortName: 'KL', value: 10},
-  {name: 'Intuition', shortName: 'IN', value: 100}
+  {key: 'MU',name: 'Mut', value: 8},
+  {key: 'KL', name: 'Klugheit', value: 8},
+  {key: 'IN', name: 'Intuition', value: 8},
+  {key: 'CH', name: 'Charisma', value: 8}
 ])
 
+const skills = reactive([
+  {key: 'verborgenesErkennen', name: 'Verborgenes Erkennen', mapIsaAttributes: ['MU', 'KL', 'IN'], value: 0},
+  {key: 'handel', name: 'Handel', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 0}
+])
 
-function setMut(e, v = +e.target.value) {
-  mut.value = v
-  calcEverything()
+function calcEverything(key){
+  var isaAttribute = attributes.find((attribute) => attribute.key === key)
+  calcWeisheit()
+  calcVerborgenesErkennen()
+  calcAllSkills()
+  calcReferencedSkills(key)
 }
 
-function setKlugheit(e, v = +e.target.value) {
-  console.log(`setKlugheit triggered`);
-  klugheit.value = v
-  calcEverything()
+function calcAllSkills() {
+  skills.forEach(skill => {
+  })
 }
 
-function setIntuition(e, v = +e.target.value) {
-  intuition.value = v
-  calcEverything()
+function calcReferencedSkills(attributeKey) {
+  skills
+  .filter(skill => skill.mapIsaAttributes.includes(attributeKey))
+  .forEach(skill => {
+    calcSkill(skill)
+  })
 }
 
-
-function calcEverything(shortName){
-  var isaAttribute = attributes.find((attribute) => attribute.shortName === shortName)
-  calcEverythingBackup()
-  var test = getAttribute(shortName)
+function calcSkill(skill) {
+  var sum = 0
+  for (var index in skill.mapIsaAttributes) {
+    var attribute = attributes.find((attribute) => attribute.key === skill.mapIsaAttributes[index])
+    sum += attribute.value
+  }
+  skill.value = Math.round(sum/3)
 }
 
-function calcWeisheit() {
-  var isaKL = attributes.find((attribute) => attribute.shortName === "KL")
-  var isaMU = attributes.find((attribute) => attribute.shortName === "MU")
-  weisheit.value = isaKL.value - isaMU.value
-}
-
-function calcVerborgenesErkennen() {
-  var isaMU = attributes.find((attribute) => attribute.shortName === "MU")
-  var isaKL = attributes.find((attribute) => attribute.shortName === "KL")
-  var isaIN = attributes.find((attribute) => attribute.shortName === "IN")
-  verborgenesErkennen.value = Math.round((isaMU.value + isaKL.value + isaIN.value) / 3)
-}
-
-function getAttribute(shortName) {
-  return attributes.find((attribute) => attribute.shortName === shortName)
+function getAttribute(key) {
+  return attributes.find((attribute) => attribute.key === key)
 }
 
 </script>
@@ -65,14 +64,17 @@ function getAttribute(shortName) {
 <template>
   <div v-for="attribute in attributes">
     <label>{{attribute.name}}</label>
-    <label>{{attribute.shortName}}</label>
+    <label>{{attribute.key}}</label>
     <label>{{attribute.value}}</label>
-    <input type="number" min="8" max="16" @change="calcEverything(attribute.shortName)" v-model.number="attribute.value" 
+    <input type="number" min="8" max="16" @change="calcEverything(attribute.key)" v-model.number="attribute.value" 
   </div>
 
-  <p>Weisheit: {{ weisheit }}</p>
-  <p>Verborgenes erkennen: {{ verborgenesErkennen }}</p>
-  <p>Works: {{ works }}</p>
+  <div v-for="skill in skills">
+    <label>{{skill.key}}</label>
+    <label>{{skill.name}}</label>
+    <label>{{skill.mapIsaAttributes}}</label>
+    <label>{{skill.value}}</label>
+  </div>
 
 </template>
 
