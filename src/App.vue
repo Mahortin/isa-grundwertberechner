@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import AnotherTemplate from './components/AnotherTemplate.vue'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
@@ -13,6 +14,7 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/makofu">MakofuView</RouterLink>
       </nav>
     </div>
   </header>
