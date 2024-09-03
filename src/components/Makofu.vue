@@ -12,6 +12,12 @@ const intuition = ref(8)
 const verborgenesErkennen = ref(Math.round((mut.value + klugheit.value + intuition.value) / 3))
 const weisheit = ref(klugheit.value - mut.value)
 
+const attributes = ref([
+  {name: 'Mut', shortName: 'MU', value: 8},
+  {name: 'Klugheit', shortName: 'KL', value: 10},
+  {name: 'Intuition', shortName: 'IN', value: 100}
+])
+
 
 function setMut(e, v = +e.target.value) {
   mut.value = v
@@ -45,7 +51,14 @@ function calcVerborgenesErkennen() {
 </script>
 
 <template>
-  <input type="number" :value="mut" @change="setMut"> Mut 
+  <div v-for="attribute in attributes">
+    <label>{{attribute.name}}</label>
+    <label>{{attribute.shortName}}</label>
+    <label>{{attribute.value}}</label>
+    <input type="number" min="8" max="16" v-model="attribute.value" 
+  </div>
+
+  <input type="number" min="8" max="16" :value="mut" @change="setMut"> Mut 
   <input type="number" :value="klugheit" @change="setKlugheit"> Klugheit
   <input type="number" :value="intuition" @change="setIntuition"> Intuition
 
