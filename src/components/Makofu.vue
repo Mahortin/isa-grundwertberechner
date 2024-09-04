@@ -41,11 +41,6 @@ function calcEverything(key){
   calcReferencedSkills(key)
 }
 
-function calcAllSkills() {
-  skills.forEach(skill => {
-  })
-}
-
 function calcReferencedSkills(attributeKey) {
   skillGroups.forEach(group => {
     group.skills
@@ -68,10 +63,6 @@ function calcSkill(skill) {
   skill.value = Math.round((sum + increasedAttributes)/3)
 
   skill.increased = (skill.value == Math.round((sum)/3) ? false : true)
-}
-
-function getAttribute(key) {
-  return attributes.find((attribute) => attribute.key === key)
 }
 
 function increase(attribute) {
