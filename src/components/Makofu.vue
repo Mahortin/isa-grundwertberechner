@@ -27,11 +27,18 @@ const attributes = reactive([
 const skillGroups = reactive([
   {key: 'koerper', name: 'Körper', skills: [
     {key: 'akrobatik', name: 'Akrobatik', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false},
+    {key: 'athletik', name: 'Athletik', mapIsaAttributes: ['GE', 'KO', 'KK'], value: 8, increased: false},
     {key: 'verborgenesErkennen', name: 'Verborgenes Erkennen', mapIsaAttributes: ['MU', 'KL', 'IN'], value: 8, increased: false}
+  ]},
+  {key: 'natur', name: 'Natur', skills: [
+    {key: 'faehrtensuche', name: 'Fährtensuche', mapIsaAttributes: ['KL', 'IN', 'KO'], value: 8, increased: false},
+    {key: 'fischenAngeln', name: 'Fischen & Angeln', mapIsaAttributes: ['IN', 'FF', 'KK'], value: 8, increased: false},
+    {key: 'himmelskunde', name: 'Himmelskunde', mapIsaAttributes: ['KL', 'IN', 'IN'], value: 8, increased: false}
   ]},
   {key: 'gesellschaft', name: 'Gesellschaft', skills: [
     {key: 'einschuechtern', name: 'Einschüchtern', mapIsaAttributes: ['MU', 'CH', 'KK'], value: 8, increased: false},
-    {key: 'handel', name: 'Handel', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}
+    {key: 'handel', name: 'Handel', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}, 
+    {key: 'schauspielerei', name: 'Schauspielerei', mapIsaAttributes: ['MU', 'KL', 'CH'], value: 8, increased: false}
   ]}
 ])
 
@@ -65,10 +72,8 @@ function calcSkill(skill) {
     sum += attribute.value
   }
   skill.value = Math.round((sum + increasedAttributes)/3)
-  if (increasedAttributes > 0)
-  {
-    skill.increased = (skill.value > Math.round((sum)/3) ? true : false)
-  }
+
+  skill.increased = (skill.value == Math.round((sum)/3) ? false : true)
 }
 
 function getAttribute(key) {
