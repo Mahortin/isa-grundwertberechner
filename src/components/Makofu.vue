@@ -26,12 +26,12 @@ const attributes = reactive([
 
 const skillGroups = reactive([
   {key: 'koerper', name: 'Körper', skills: [
-    {key: 'akrobatik', name: 'Akrobatik', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 0},
-    {key: 'verborgenesErkennen', name: 'Verborgenes Erkennen', mapIsaAttributes: ['MU', 'KL', 'IN'], value: 0}
+    {key: 'akrobatik', name: 'Akrobatik', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false},
+    {key: 'verborgenesErkennen', name: 'Verborgenes Erkennen', mapIsaAttributes: ['MU', 'KL', 'IN'], value: 8, increased: false}
   ]},
   {key: 'gesellschaft', name: 'Gesellschaft', skills: [
-    {key: 'einschuechtern', name: 'Einschüchtern', mapIsaAttributes: ['MU', 'CH', 'KK'], value: 0},
-    {key: 'handel', name: 'Handel', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 0}
+    {key: 'einschuechtern', name: 'Einschüchtern', mapIsaAttributes: ['MU', 'CH', 'KK'], value: 8, increased: false},
+    {key: 'handel', name: 'Handel', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}
   ]}
 ])
 
@@ -58,11 +58,17 @@ function calcReferencedSkills(attributeKey) {
 
 function calcSkill(skill) {
   var sum = 0
+  var increasedAttributes = 0
   for (var index in skill.mapIsaAttributes) {
     var attribute = attributes.find((attribute) => attribute.key === skill.mapIsaAttributes[index])
+    increasedAttributes += attribute.increased ? 1 : 0
     sum += attribute.value
   }
-  skill.value = Math.round(sum/3)
+  skill.value = Math.round((sum + increasedAttributes)/3)
+  if (increasedAttributes > 0)
+  {
+    skill.increased = (skill.value > Math.round((sum)/3) ? true : false)
+  }
 }
 
 function getAttribute(key) {
@@ -71,6 +77,7 @@ function getAttribute(key) {
 
 function increase(attribute) {
   attribute.increased = !attribute.increased
+  calcReferencedSkills(attribute.key)
 }
 
 </script>
@@ -95,7 +102,6 @@ function increase(attribute) {
           v-model.number="attribute.value"
           class="attribute-input"
         />
-        <label color="[attribute.increased ? 'green' ]" @click="increase(attribute)">{{attribute.increased}}</label>
         <button :class="[attribute.increased ? 'active-button' : '']" @click="increase(attribute)">+</button>
       </div>
     </div>
@@ -106,7 +112,7 @@ function increase(attribute) {
       <div v-for="group in skillGroups" :key="group.name" class="skill-group">
         <h3>{{ group.name }}</h3>
         <div v-for="skill in group.skills" :key="skill.key" class="skill-item">
-          <div class="skill-info">
+          <div :class="[skill.increased ? 'skill-info-increased' : 'skill-info']">
             <span class="skill-name">{{ skill.name }}</span>
             <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
             <span class="skill-value">{{ skill.value }}</span>
@@ -142,6 +148,23 @@ function increase(attribute) {
   width: 100%;
 }
 
+.skill-info-increased {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3acf4b; /* Slightly darker greenish background on hover */
+  color: #713604; /* Change the font color to white when active */
+  border-radius: 8px; /* Rounded corners for a modern feel */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  font-weight: 600; /* Slightly bolder font for emphasis */
+}
+
+.skill-info-increased:hover {
+  background-color: #51cf5f; /* Slightly darker blue on hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* More pronounced shadow on hover */
+}
+
 .attribute-name, .attribute-key, .attribute-value,
 .skill-key, .skill-name, .skill-attributes, .skill-value {
   margin-right: 10px;
@@ -168,19 +191,19 @@ button {
 
 /* Active state: Change only the background color */
 button.active-button {
-  background-color: #713604; /* Modern blue background for active state */
-  color: white; /* Change the font color to white when active */
+  background-color: #3acf4b; /* Modern blue background for active state */
+  color: #713604; /* Change the font color to white when active */
 }
 
 /* Hover state: Slight background change and shadow lift */
 button:hover {
-  background-color: #e0e0e0; /* Light gray on hover for normal buttons */
+  background-color: #f5ebda; /* Light gray on hover for normal buttons */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Increase shadow for hover effect */
 }
 
 /* Hover state for active button */
 button.active-button:hover {
-  background-color: #783c0b; /* Slightly darker blue on hover */
+  background-color: #51cf5f; /* Slightly darker blue on hover */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Increase shadow for hover effect */
 }
 
