@@ -5,119 +5,511 @@ const showOnlyIncreasedSkills = ref(false)
 const myTest = ref(false)
 
 const attributes = reactive([
-  {key: 'MU',name: 'Mut', value: 8, increased: false},
-  {key: 'KL', name: 'Klugheit', value: 8, increased: false},
-  {key: 'IN', name: 'Intuition', value: 8, increased: false},
-  {key: 'CH', name: 'Charisma', value: 8, increased: false},
-  {key: 'FF', name: 'Fingerfertigkeit', value: 8, increased: false},
-  {key: 'GE', name: 'Gewandheit', value: 8, increased: false},
-  {key: 'KO', name: 'Konstitution', value: 8, increased: false},
-  {key: 'KK', name: 'Körperkraft', value: 8, increased: false}
+  { key: 'MU', name: 'Mut', value: 8, increased: false },
+  { key: 'KL', name: 'Klugheit', value: 8, increased: false },
+  { key: 'IN', name: 'Intuition', value: 8, increased: false },
+  { key: 'CH', name: 'Charisma', value: 8, increased: false },
+  { key: 'FF', name: 'Fingerfertigkeit', value: 8, increased: false },
+  { key: 'GE', name: 'Gewandheit', value: 8, increased: false },
+  { key: 'KO', name: 'Konstitution', value: 8, increased: false },
+  { key: 'KK', name: 'Körperkraft', value: 8, increased: false }
 ])
 
 const skillGroups = reactive([
-  {key: 'koerper', name: 'Körper', increasedSkills: 0, skills: [
-    {key: 'akrobatik', name: 'Akrobatik', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false},
-    {key: 'athletik', name: 'Athletik', mapIsaAttributes: ['GE', 'KO', 'KK'], value: 8, increased: false},
-    {key: 'diebeskunst', name: 'Diebeskunst', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false},
-    {key: 'heimlichkeit', name: 'Heimlichkeit', mapIsaAttributes: ['MU', 'IN', 'GE'], value: 8, increased: false},
-    {key: 'horchen', name: 'Horchen', mapIsaAttributes: ['KL', 'IN', 'KO'], value: 8, increased: false},
-    {key: 'klettern', name: 'Klettern', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false},
-    {key: 'reiten', name: 'Reiten', mapIsaAttributes: ['CH', 'GE', 'KK'], value: 8, increased: false},
-    {key: 'schwimmen', name: 'Schwimmen', mapIsaAttributes: ['GE', 'KO', 'KK'], value: 8, increased: false},
-    {key: 'verborgenesErkennen', name: 'Verborgenes Erkennen', mapIsaAttributes: ['MU', 'KL', 'IN'], value: 8, increased: false}, 
-    {key: 'zechen', name: 'Zechen', mapIsaAttributes: ['IN', 'KO', 'KK'], value: 8, increased: false}
-  ]},
-  {key: 'natur', name: 'Natur', increasedSkills: 0, skills: [
-    {key: 'faehrtensuche', name: 'Fährtensuche', mapIsaAttributes: ['KL', 'IN', 'KO'], value: 8, increased: false},
-    {key: 'fischenAngeln', name: 'Fischen & Angeln', mapIsaAttributes: ['IN', 'FF', 'KK'], value: 8, increased: false},
-    {key: 'himmelskunde', name: 'Himmelskunde', mapIsaAttributes: ['KL', 'IN', 'IN'], value: 8, increased: false}, 
-    {key: 'lagerRasten', name: 'Lager & Rasten', mapIsaAttributes: ['IN', 'GE', 'KO'], value: 8, increased: false},
-    {key: 'orientierung', name: 'Orientierung', mapIsaAttributes: ['KL', 'IN', 'IN'], value: 8, increased: false}, 
-    {key: 'pflanzenkunde', name: 'Pflanzenkunde', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
-    {key: 'tierkunde', name: 'Tierkunde', mapIsaAttributes: ['MU', 'KL', 'IN'], value: 8, increased: false}
-  ]},
-  {key: 'handwerk', name: 'Handwerk', increasedSkills: 0, skills: [
-    {key: 'alchemie', name: 'Alchemie', mapIsaAttributes: ['MU', 'KL', 'FF'], value: 8, increased: false},
-    {key: 'bootSeefahrt', name: 'Boot- & Seefahrt', mapIsaAttributes: ['IN', 'GE', 'KO'], value: 8, increased: false},
-    {key: 'fahrzeugLenken', name: 'Fahrzeug lenken', mapIsaAttributes: ['IN', 'CH', 'FF'], value: 8, increased: false}, 
-    {key: 'holzbearbeitung', name: 'Holzbearbeitung', mapIsaAttributes: ['KL', 'FF', 'KK'], value: 8, increased: false},
-    {key: 'kochenBrauen', name: 'Kochen & Brauen', mapIsaAttributes: ['KL', 'FF', 'FF'], value: 8, increased: false}, 
-    {key: 'lehmSteinbearbeitung', name: 'Lehm- & Steinbearbeitung', mapIsaAttributes: ['KL', 'FF', 'FF'], value: 8, increased: false}, 
-    {key: 'malenZeichnen', name: 'Malen & Zeichnen', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
-    {key: 'musizieren', name: 'Musizieren', mapIsaAttributes: ['IN', 'CH', 'FF'], value: 8, increased: false}, 
-    {key: 'schmiedekunst', name: 'Schmiedekunst', mapIsaAttributes: ['FF', 'KO', 'KK'], value: 8, increased: false}, 
-    {key: 'schneiderLederarbeiten', name: 'Schneider- & Lederarbeiten', mapIsaAttributes: ['KL', 'FF', 'KO'], value: 8, increased: false}
-  ]},
-  {key: 'gesellschaft', name: 'Gesellschaft', increasedSkills: 0, skills: [
-    {key: 'einschuechtern', name: 'Einschüchtern', mapIsaAttributes: ['MU', 'CH', 'KK'], value: 8, increased: false},
-    {key: 'handel', name: 'Handel', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}, 
-    {key: 'schauspielerei', name: 'Schauspielerei', mapIsaAttributes: ['MU', 'KL', 'CH'], value: 8, increased: false}, 
-    {key: 'standeswissen', name: 'Standeswissen', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}, 
-    {key: 'tanzen', name: 'Tanzen', mapIsaAttributes: ['CH', 'GE', 'GE'], value: 8, increased: false}, 
-    {key: 'ueberreden', name: 'Überreden', mapIsaAttributes: ['MU', 'IN', 'CH'], value: 8, increased: false}, 
-    {key: 'ueberzeugen', name: 'Überzeugen', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}
-  ]}, 
-  {key: 'wissen', name: 'Wissen', increasedSkills: 0, skills: [
-    {key: 'architekt', name: 'Architekt', mapIsaAttributes: ['KL', 'KL', 'FF'], value: 8, increased: false},
-    {key: 'geographie', name: 'Geographie', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false},
-    {key: 'geschichtswissen', name: 'Geschichtswissen', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}, 
-    {key: 'goetterKulte', name: 'Götter & Kulte', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false},
-    {key: 'heilkundeGeist', name: '(Heil-)Kunde des Geistes', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}, 
-    {key: 'heilkundeKoerper', name: '(Heil-)Kunde des Körpers', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
-    {key: 'heilkundeSaefte', name: '(Heil-)Kunde der Säfte', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}, 
-    {key: 'kriegskunst', name: 'Kriegskunst', mapIsaAttributes: ['MU', 'KL', 'CH'], value: 8, increased: false}, 
-    {key: 'magiekunde', name: 'Magiekunde', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}, 
-    {key: 'rechnenPhysik', name: 'Rechnen & Physik', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
-    {key: 'rechtsStaatskunst', name: 'Rechts- & Staatskunst', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}
-  ]}
+  {
+    key: 'koerper',
+    name: 'Körper',
+    increasedSkills: 0,
+    skills: [
+      {
+        key: 'akrobatik',
+        name: 'Akrobatik',
+        mapIsaAttributes: ['MU', 'GE', 'KK'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'athletik',
+        name: 'Athletik',
+        mapIsaAttributes: ['GE', 'KO', 'KK'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'diebeskunst',
+        name: 'Diebeskunst',
+        mapIsaAttributes: ['KL', 'IN', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'heimlichkeit',
+        name: 'Heimlichkeit',
+        mapIsaAttributes: ['MU', 'IN', 'GE'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'horchen',
+        name: 'Horchen',
+        mapIsaAttributes: ['KL', 'IN', 'KO'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'klettern',
+        name: 'Klettern',
+        mapIsaAttributes: ['MU', 'GE', 'KK'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'reiten',
+        name: 'Reiten',
+        mapIsaAttributes: ['CH', 'GE', 'KK'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'schwimmen',
+        name: 'Schwimmen',
+        mapIsaAttributes: ['GE', 'KO', 'KK'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'verborgenesErkennen',
+        name: 'Verborgenes Erkennen',
+        mapIsaAttributes: ['MU', 'KL', 'IN'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'zechen',
+        name: 'Zechen',
+        mapIsaAttributes: ['IN', 'KO', 'KK'],
+        value: 8,
+        increased: false
+      }
+    ]
+  },
+  {
+    key: 'natur',
+    name: 'Natur',
+    increasedSkills: 0,
+    skills: [
+      {
+        key: 'faehrtensuche',
+        name: 'Fährtensuche',
+        mapIsaAttributes: ['KL', 'IN', 'KO'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'fischenAngeln',
+        name: 'Fischen & Angeln',
+        mapIsaAttributes: ['IN', 'FF', 'KK'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'himmelskunde',
+        name: 'Himmelskunde',
+        mapIsaAttributes: ['KL', 'IN', 'IN'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'lagerRasten',
+        name: 'Lager & Rasten',
+        mapIsaAttributes: ['IN', 'GE', 'KO'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'orientierung',
+        name: 'Orientierung',
+        mapIsaAttributes: ['KL', 'IN', 'IN'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'pflanzenkunde',
+        name: 'Pflanzenkunde',
+        mapIsaAttributes: ['KL', 'IN', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'tierkunde',
+        name: 'Tierkunde',
+        mapIsaAttributes: ['MU', 'KL', 'IN'],
+        value: 8,
+        increased: false
+      }
+    ]
+  },
+  {
+    key: 'handwerk',
+    name: 'Handwerk',
+    increasedSkills: 0,
+    skills: [
+      {
+        key: 'alchemie',
+        name: 'Alchemie',
+        mapIsaAttributes: ['MU', 'KL', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'bootSeefahrt',
+        name: 'Boot- & Seefahrt',
+        mapIsaAttributes: ['IN', 'GE', 'KO'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'fahrzeugLenken',
+        name: 'Fahrzeug lenken',
+        mapIsaAttributes: ['IN', 'CH', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'holzbearbeitung',
+        name: 'Holzbearbeitung',
+        mapIsaAttributes: ['KL', 'FF', 'KK'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'kochenBrauen',
+        name: 'Kochen & Brauen',
+        mapIsaAttributes: ['KL', 'FF', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'lehmSteinbearbeitung',
+        name: 'Lehm- & Steinbearbeitung',
+        mapIsaAttributes: ['KL', 'FF', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'malenZeichnen',
+        name: 'Malen & Zeichnen',
+        mapIsaAttributes: ['KL', 'IN', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'musizieren',
+        name: 'Musizieren',
+        mapIsaAttributes: ['IN', 'CH', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'schmiedekunst',
+        name: 'Schmiedekunst',
+        mapIsaAttributes: ['FF', 'KO', 'KK'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'schneiderLederarbeiten',
+        name: 'Schneider- & Lederarbeiten',
+        mapIsaAttributes: ['KL', 'FF', 'KO'],
+        value: 8,
+        increased: false
+      }
+    ]
+  },
+  {
+    key: 'gesellschaft',
+    name: 'Gesellschaft',
+    increasedSkills: 0,
+    skills: [
+      {
+        key: 'einschuechtern',
+        name: 'Einschüchtern',
+        mapIsaAttributes: ['MU', 'CH', 'KK'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'handel',
+        name: 'Handel',
+        mapIsaAttributes: ['KL', 'IN', 'CH'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'schauspielerei',
+        name: 'Schauspielerei',
+        mapIsaAttributes: ['MU', 'KL', 'CH'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'standeswissen',
+        name: 'Standeswissen',
+        mapIsaAttributes: ['KL', 'IN', 'CH'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'tanzen',
+        name: 'Tanzen',
+        mapIsaAttributes: ['CH', 'GE', 'GE'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'ueberreden',
+        name: 'Überreden',
+        mapIsaAttributes: ['MU', 'IN', 'CH'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'ueberzeugen',
+        name: 'Überzeugen',
+        mapIsaAttributes: ['KL', 'IN', 'CH'],
+        value: 8,
+        increased: false
+      }
+    ]
+  },
+  {
+    key: 'wissen',
+    name: 'Wissen',
+    increasedSkills: 0,
+    skills: [
+      {
+        key: 'architekt',
+        name: 'Architekt',
+        mapIsaAttributes: ['KL', 'KL', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'geographie',
+        name: 'Geographie',
+        mapIsaAttributes: ['KL', 'KL', 'IN'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'geschichtswissen',
+        name: 'Geschichtswissen',
+        mapIsaAttributes: ['KL', 'KL', 'IN'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'goetterKulte',
+        name: 'Götter & Kulte',
+        mapIsaAttributes: ['KL', 'KL', 'IN'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'heilkundeGeist',
+        name: '(Heil-)Kunde des Geistes',
+        mapIsaAttributes: ['KL', 'IN', 'CH'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'heilkundeKoerper',
+        name: '(Heil-)Kunde des Körpers',
+        mapIsaAttributes: ['KL', 'IN', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'heilkundeSaefte',
+        name: '(Heil-)Kunde der Säfte',
+        mapIsaAttributes: ['KL', 'KL', 'IN'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'kriegskunst',
+        name: 'Kriegskunst',
+        mapIsaAttributes: ['MU', 'KL', 'CH'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'magiekunde',
+        name: 'Magiekunde',
+        mapIsaAttributes: ['KL', 'KL', 'IN'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'rechnenPhysik',
+        name: 'Rechnen & Physik',
+        mapIsaAttributes: ['KL', 'IN', 'FF'],
+        value: 8,
+        increased: false
+      },
+      {
+        key: 'rechtsStaatskunst',
+        name: 'Rechts- & Staatskunst',
+        mapIsaAttributes: ['KL', 'KL', 'IN'],
+        value: 8,
+        increased: false
+      }
+    ]
+  }
 ])
 
-const combatGroup = reactive(
-  {key: 'kampf', name: 'Kampf', increasedSkills: 0, skills: [
-    {key: 'dolchFechtwaffen', name: 'Dolch- & Fechtwaffen', mapIsaAttributes: ['MU', 'FF', 'GE'], value: 8, increased: false},
-    {key: 'hiebKettenwaffen', name: 'Hieb- & Kettenwaffen', mapIsaAttributes: ['MU', 'KO', 'KK'], value: 8, increased: false},
-    {key: 'raufenRingen', name: 'Raufen & Ringen', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false}, 
-    {key: 'saebelSchwerter', name: 'Säbel & Schwerter', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false},
-    {key: 'speerStabwaffen', name: 'Speer & Stabwaffen', mapIsaAttributes: ['MU', 'FF', 'KK'], value: 8, increased: false}, 
-    {key: 'armbrust', name: 'Armbrust', mapIsaAttributes: ['IN', 'FF', 'KK'], value: 8, increased: false}, 
-    {key: 'bogen', name: 'Bogen', mapIsaAttributes: ['FF', 'GE', 'KK'], value: 8, increased: false}, 
-    {key: 'torsionswaffen', name: 'Torsionswaffen', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
-    {key: 'wurfSchleuderwaffen', name: 'Wurf- & Schleuderwaffen', mapIsaAttributes: ['FF', 'GE', 'KK'], value: 8, increased: false} 
-  ]}
-)
+const combatGroup = reactive({
+  key: 'kampf',
+  name: 'Kampf',
+  increasedSkills: 0,
+  skills: [
+    {
+      key: 'dolchFechtwaffen',
+      name: 'Dolch- & Fechtwaffen',
+      mapIsaAttributes: ['MU', 'FF', 'GE'],
+      value: 8,
+      increased: false
+    },
+    {
+      key: 'hiebKettenwaffen',
+      name: 'Hieb- & Kettenwaffen',
+      mapIsaAttributes: ['MU', 'KO', 'KK'],
+      value: 8,
+      increased: false
+    },
+    {
+      key: 'raufenRingen',
+      name: 'Raufen & Ringen',
+      mapIsaAttributes: ['MU', 'GE', 'KK'],
+      value: 8,
+      increased: false
+    },
+    {
+      key: 'saebelSchwerter',
+      name: 'Säbel & Schwerter',
+      mapIsaAttributes: ['MU', 'GE', 'KK'],
+      value: 8,
+      increased: false
+    },
+    {
+      key: 'speerStabwaffen',
+      name: 'Speer & Stabwaffen',
+      mapIsaAttributes: ['MU', 'FF', 'KK'],
+      value: 8,
+      increased: false
+    },
+    {
+      key: 'armbrust',
+      name: 'Armbrust',
+      mapIsaAttributes: ['IN', 'FF', 'KK'],
+      value: 8,
+      increased: false
+    },
+    {
+      key: 'bogen',
+      name: 'Bogen',
+      mapIsaAttributes: ['FF', 'GE', 'KK'],
+      value: 8,
+      increased: false
+    },
+    {
+      key: 'torsionswaffen',
+      name: 'Torsionswaffen',
+      mapIsaAttributes: ['KL', 'IN', 'FF'],
+      value: 8,
+      increased: false
+    },
+    {
+      key: 'wurfSchleuderwaffen',
+      name: 'Wurf- & Schleuderwaffen',
+      mapIsaAttributes: ['FF', 'GE', 'KK'],
+      value: 8,
+      increased: false
+    }
+  ]
+})
 
-const calculatedAttributes = reactive(
-  {key: 'calcAttributes', name: 'Abgeleitete Eigenschaften', increasedSkills: 0, skills: [
-    {key: 'robustheit', name: 'Robustheit', mapIsaAttributes: ['KO', 'KO', 'KK'], value: 8, divider: 3, increased: false},
-    {key: 'mumm', name: 'Mumm', mapIsaAttributes: ['MU', 'MU', 'KL'], value: 8, divider: 5, increased: false},
-    {key: 'bewegung', name: 'Bewegung', mapIsaAttributes: ['GE', 'GE', 'IN'], value: 8, divider: 5, increased: false}, 
-    {key: 'reflexe', name: 'Reflexe', mapIsaAttributes: ['KL', 'IN', 'GE'], value: 8, divider: 3, increased: false},
-    {key: 'sprachbegabung', name: 'Sprachbegabung', mapIsaAttributes: ['KL', 'IN', 'CH'], divider: 3, value: 8, increased: false}
-  ]}
-)
+const calculatedAttributes = reactive({
+  key: 'calcAttributes',
+  name: 'Abgeleitete Eigenschaften',
+  increasedSkills: 0,
+  skills: [
+    {
+      key: 'robustheit',
+      name: 'Robustheit',
+      mapIsaAttributes: ['KO', 'KO', 'KK'],
+      value: 8,
+      divider: 3,
+      increased: false
+    },
+    {
+      key: 'mumm',
+      name: 'Mumm',
+      mapIsaAttributes: ['MU', 'MU', 'KL'],
+      value: 8,
+      divider: 5,
+      increased: false
+    },
+    {
+      key: 'bewegung',
+      name: 'Bewegung',
+      mapIsaAttributes: ['GE', 'GE', 'IN'],
+      value: 8,
+      divider: 5,
+      increased: false
+    },
+    {
+      key: 'reflexe',
+      name: 'Reflexe',
+      mapIsaAttributes: ['KL', 'IN', 'GE'],
+      value: 8,
+      divider: 3,
+      increased: false
+    },
+    {
+      key: 'sprachbegabung',
+      name: 'Sprachbegabung',
+      mapIsaAttributes: ['KL', 'IN', 'CH'],
+      divider: 3,
+      value: 8,
+      increased: false
+    }
+  ]
+})
 
-function calcEverything(key){
+function calcEverything(key) {
   calcReferencedSkills(key)
   calcReferencedCalcAttributes(key)
 }
 
 function calcReferencedCalcAttributes(attributeKey) {
   calculatedAttributes.skills
-    .filter(skill => skill.mapIsaAttributes.includes(attributeKey))
-    .forEach(skill => {
+    .filter((skill) => skill.mapIsaAttributes.includes(attributeKey))
+    .forEach((skill) => {
       calcCalcAttribute(skill)
-  })
-  calculatedAttributes.increasedSkills = calculatedAttributes.skills.filter((skill) => skill.increased === true).length
+    })
+  calculatedAttributes.increasedSkills = calculatedAttributes.skills.filter(
+    (skill) => skill.increased === true
+  ).length
 }
 
 function calcReferencedSkills(attributeKey) {
-  skillGroups.forEach(group => {
+  skillGroups.forEach((group) => {
     group.skills
-      .filter(skill => skill.mapIsaAttributes.includes(attributeKey))
-      .forEach(skill => {
+      .filter((skill) => skill.mapIsaAttributes.includes(attributeKey))
+      .forEach((skill) => {
         calcSkill(skill)
-    })
+      })
     group.increasedSkills = group.skills.filter((skill) => skill.increased === true).length
   })
 }
@@ -130,12 +522,11 @@ function calcSkill(skill) {
     increasedAttributes += attribute.increased ? 1 : 0
     sum += attribute.value
   }
-  skill.value = Math.round((sum + increasedAttributes)/3)
-  skill.increased = (skill.value == Math.round((sum)/3) ? false : true)
+  skill.value = Math.round((sum + increasedAttributes) / 3)
+  skill.increased = skill.value == Math.round(sum / 3) ? false : true
 }
 
 function calcCalcAttribute(skill) {
-
   var sum = 0
   var increasedAttributes = 0
   for (var index in skill.mapIsaAttributes) {
@@ -143,8 +534,8 @@ function calcCalcAttribute(skill) {
     increasedAttributes += attribute.increased ? 1 : 0
     sum += attribute.value
   }
-  skill.value = Math.round((sum + increasedAttributes)/skill.divider)
-  skill.increased = (skill.value == Math.round((sum)/skill.divider) ? false : true)
+  skill.value = Math.round((sum + increasedAttributes) / skill.divider)
+  skill.increased = skill.value == Math.round(sum / skill.divider) ? false : true
 }
 
 function increase(attribute) {
@@ -155,11 +546,10 @@ function increase(attribute) {
 function toggleFilter() {
   showOnlyIncreasedSkills.value = !showOnlyIncreasedSkills.value
 }
-
 </script>
 
 <template>
-<div class="container">
+  <div class="container">
     <!-- Column for Attributes -->
     <div class="column">
       <h1>Eigenschaften</h1>
@@ -167,31 +557,42 @@ function toggleFilter() {
         <div class="attribute-info">
           <span class="attribute-key">{{ attribute.key }}</span>
           <span class="attribute-name">{{ attribute.name }}</span>
-          
         </div>
-        <input 
-          type="number" 
-          min="8" 
-          max="16" 
-          @change="calcEverything(attribute.key)" 
+        <input
+          type="number"
+          min="8"
+          max="16"
+          @change="calcEverything(attribute.key)"
           v-model.number="attribute.value"
           class="attribute-input"
         />
-        <button :class="[attribute.increased ? 'highlight-button' : '']" @click="increase(attribute)">+</button>
+        <button
+          :class="[attribute.increased ? 'highlight-button' : '']"
+          @click="increase(attribute)"
+        >
+          +
+        </button>
       </div>
     </div>
 
     <!-- Column for Skill Groups -->
     <div class="column">
       <h1>Talente</h1>
-      <button :class="[showOnlyIncreasedSkills ? 'highlight-button' : '']" @click="toggleFilter()">Nur erhöhte Talente</button>
+      <button :class="[showOnlyIncreasedSkills ? 'highlight-button' : '']" @click="toggleFilter()">
+        Nur erhöhte Talente
+      </button>
 
       <h2>
         {{ calculatedAttributes.name }}
-        <span :class="[(calculatedAttributes.increasedSkills > 0) ? 'highlight-badge' : 'badge']">{{ calculatedAttributes.increasedSkills }}</span>
+        <span :class="[calculatedAttributes.increasedSkills > 0 ? 'highlight-badge' : 'badge']">{{
+          calculatedAttributes.increasedSkills
+        }}</span>
       </h2>
       <div v-for="skill in calculatedAttributes.skills" :key="skill.key" class="skill-item">
-        <div v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)" :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']">
+        <div
+          v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)"
+          :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']"
+        >
           <span class="skill-name">{{ skill.name }}</span>
           <span class="skill-value">{{ skill.value }}</span>
           <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
@@ -200,10 +601,15 @@ function toggleFilter() {
 
       <h2>
         {{ combatGroup.name }}
-        <span :class="[(combatGroup.increasedSkills > 0) ? 'highlight-badge' : 'badge']">{{ combatGroup.increasedSkills }}</span>
+        <span :class="[combatGroup.increasedSkills > 0 ? 'highlight-badge' : 'badge']">{{
+          combatGroup.increasedSkills
+        }}</span>
       </h2>
       <div v-for="skill in combatGroup.skills" :key="skill.key" class="skill-item">
-        <div v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)" :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']">
+        <div
+          v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)"
+          :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']"
+        >
           <span class="skill-name">{{ skill.name }}</span>
           <span class="skill-value">{{ skill.value }}</span>
           <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
@@ -213,10 +619,15 @@ function toggleFilter() {
       <div v-for="group in skillGroups" :key="group.name" class="skill-group">
         <h2>
           {{ group.name }}
-          <span :class="[(group.increasedSkills > 0) ? 'highlight-badge' : 'badge']">{{ group.increasedSkills }}</span>
+          <span :class="[group.increasedSkills > 0 ? 'highlight-badge' : 'badge']">{{
+            group.increasedSkills
+          }}</span>
         </h2>
         <div v-for="skill in group.skills" :key="skill.key" class="skill-item">
-          <div v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)" :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']">
+          <div
+            v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)"
+            :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']"
+          >
             <span class="skill-name">{{ skill.name }}</span>
             <span class="skill-value">{{ skill.value }}</span>
             <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
@@ -225,7 +636,6 @@ function toggleFilter() {
       </div>
     </div>
   </div>
-
 </template>
 
 <style scoped>
@@ -238,7 +648,8 @@ function toggleFilter() {
   width: 48%;
 }
 
-.attribute-item, .skill-item {
+.attribute-item,
+.skill-item {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -246,7 +657,8 @@ function toggleFilter() {
   white-space: nowrap; /* Prevent line breaks within the items */
 }
 
-.attribute-info, .skill-info {
+.attribute-info,
+.skill-info {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -260,7 +672,9 @@ function toggleFilter() {
   color: #713604; /* Change the font color to white when active */
   border-radius: 8px; /* Rounded corners for a modern feel */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transitions */
   font-weight: 600; /* Slightly bolder font for emphasis */
 }
 
@@ -269,8 +683,13 @@ function toggleFilter() {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* More pronounced shadow on hover */
 }
 
-.attribute-name, .attribute-key, .attribute-value,
-.skill-key, .skill-name, .skill-attributes, .skill-value {
+.attribute-name,
+.attribute-key,
+.attribute-value,
+.skill-key,
+.skill-name,
+.skill-attributes,
+.skill-value {
   margin-right: 10px;
   flex-shrink: 0; /* Prevent shrinking */
   overflow: hidden;
@@ -290,7 +709,9 @@ button {
   font-size: 16px;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transition effects */
 }
 
 /* Active state: Change only the background color */
@@ -330,7 +751,8 @@ button.highlight-button:hover {
   margin-left: 10px;
 }
 
-h3, h4 {
+h3,
+h4 {
   margin-bottom: 15px;
 }
 
@@ -342,7 +764,9 @@ input {
   border-radius: 6px; /* Rounded corners */
   font-size: 16px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow for depth */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transitions */
 }
 
 input:focus {
@@ -354,5 +778,4 @@ input:focus {
 input::placeholder {
   color: #7f8c8d; /* Slightly lighter placeholder text */
 }
-
 </style>
