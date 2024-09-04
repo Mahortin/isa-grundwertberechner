@@ -2,16 +2,10 @@
 defineProps<{
   msg: string
 }>()
-import { ref } from 'vue'
-import { reactive, computed } from 'vue'
+import { ref, reactive, computed } from 'vue'
 
-const works = ref(0)
-const mut = ref(8)
-const klugheit = ref(8)
-const intuition = ref(8)
-
-const verborgenesErkennen = ref(Math.round((mut.value + klugheit.value + intuition.value) / 3))
-const weisheit = ref(klugheit.value - mut.value)
+const showOnlyIncreasedSkills = ref(false)
+const myTest = ref(false)
 
 const attributes = reactive([
   {key: 'MU',name: 'Mut', value: 8, increased: false},
@@ -85,6 +79,10 @@ function increase(attribute) {
   calcReferencedSkills(attribute.key)
 }
 
+function toggleFilter() {
+  showOnlyIncreasedSkills.value = !showOnlyIncreasedSkills.value
+}
+
 </script>
 
 <template>
@@ -114,13 +112,14 @@ function increase(attribute) {
     <!-- Column for Skill Groups -->
     <div class="column">
       <h1>Talente</h1>
+      <button :class="[showOnlyIncreasedSkills ? 'highlight-button' : '']" @click="toggleFilter()">Nur erhöhte Talente</button>
       <div v-for="group in skillGroups" :key="group.name" class="skill-group">
         <h2>
           {{ group.name }}
           <span :class="[(group.increasedSkills > 0) ? 'highlight-badge' : 'badge']">{{ group.increasedSkills }}</span>
         </h2>
         <div v-for="skill in group.skills" :key="skill.key" class="skill-item">
-          <div :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']">
+          <div v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)" :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']">
             <span class="skill-name">{{ skill.name }}</span>
             <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
             <span class="skill-value">{{ skill.value }}</span>
