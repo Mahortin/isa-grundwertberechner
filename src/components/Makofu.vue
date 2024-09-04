@@ -73,6 +73,17 @@ const skillGroups = reactive([
     {key: 'magiekunde', name: 'Magiekunde', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}, 
     {key: 'rechnenPhysik', name: 'Rechnen & Physik', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
     {key: 'rechtsStaatskunst', name: 'Rechts- & Staatskunst', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}
+  ]}, 
+  {key: 'kampf', name: 'Kampf', increasedSkills: 0, skills: [
+    {key: 'dolchFechtwaffen', name: 'Dolch- & Fechtwaffen', mapIsaAttributes: ['MU', 'FF', 'GE'], value: 8, increased: false},
+    {key: 'hiebKettenwaffen', name: 'Hieb- & Kettenwaffen', mapIsaAttributes: ['MU', 'KO', 'KK'], value: 8, increased: false},
+    {key: 'raufenRingen', name: 'Raufen & Ringen', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false}, 
+    {key: 'saebelSchwerter', name: 'Säbel & Schwerter', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false},
+    {key: 'speerStabwaffen', name: 'Speer & Stabwaffen', mapIsaAttributes: ['MU', 'FF', 'KK'], value: 8, increased: false}, 
+    {key: 'armbrust', name: 'Armbrust', mapIsaAttributes: ['IN', 'FF', 'KK'], value: 8, increased: false}, 
+    {key: 'bogen', name: 'Bogen', mapIsaAttributes: ['FF', 'GE', 'KK'], value: 8, increased: false}, 
+    {key: 'torsionswaffen', name: 'Torsionswaffen', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
+    {key: 'wurfSchleuderwaffen', name: 'Wurf- & Schleuderwaffen', mapIsaAttributes: ['FF', 'GE', 'KK'], value: 8, increased: false} 
   ]}
 ])
 
