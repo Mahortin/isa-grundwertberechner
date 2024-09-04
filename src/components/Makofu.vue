@@ -1,7 +1,4 @@
 <script setup lang="ts">
-defineProps<{
-  msg: string
-}>()
 import { ref, reactive, computed } from 'vue'
 
 const showOnlyIncreasedSkills = ref(false)
@@ -73,7 +70,10 @@ const skillGroups = reactive([
     {key: 'magiekunde', name: 'Magiekunde', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}, 
     {key: 'rechnenPhysik', name: 'Rechnen & Physik', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
     {key: 'rechtsStaatskunst', name: 'Rechts- & Staatskunst', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}
-  ]}, 
+  ]}
+])
+
+const combatGroup = reactive(
   {key: 'kampf', name: 'Kampf', increasedSkills: 0, skills: [
     {key: 'dolchFechtwaffen', name: 'Dolch- & Fechtwaffen', mapIsaAttributes: ['MU', 'FF', 'GE'], value: 8, increased: false},
     {key: 'hiebKettenwaffen', name: 'Hieb- & Kettenwaffen', mapIsaAttributes: ['MU', 'KO', 'KK'], value: 8, increased: false},
@@ -85,11 +85,30 @@ const skillGroups = reactive([
     {key: 'torsionswaffen', name: 'Torsionswaffen', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
     {key: 'wurfSchleuderwaffen', name: 'Wurf- & Schleuderwaffen', mapIsaAttributes: ['FF', 'GE', 'KK'], value: 8, increased: false} 
   ]}
-])
+)
+
+const calculatedAttributes = reactive(
+  {key: 'calcAttributes', name: 'Abgeleitete Eigenschaften', increasedSkills: 0, skills: [
+    {key: 'robustheit', name: 'Robustheit', mapIsaAttributes: ['KO', 'KO', 'KK'], value: 8, divider: 3, increased: false},
+    {key: 'mumm', name: 'Mumm', mapIsaAttributes: ['MU', 'MU', 'KL'], value: 8, divider: 5, increased: false},
+    {key: 'bewegung', name: 'Bewegung', mapIsaAttributes: ['GE', 'GE', 'IN'], value: 8, divider: 5, increased: false}, 
+    {key: 'reflexe', name: 'Reflexe', mapIsaAttributes: ['KL', 'IN', 'GE'], value: 8, divider: 3, increased: false},
+    {key: 'sprachbegabung', name: 'Sprachbegabung', mapIsaAttributes: ['KL', 'IN', 'CH'], divider: 3, value: 8, increased: false}
+  ]}
+)
 
 function calcEverything(key){
-  var isaAttribute = attributes.find((attribute) => attribute.key === key)
   calcReferencedSkills(key)
+  calcReferencedCalcAttributes(key)
+}
+
+function calcReferencedCalcAttributes(attributeKey) {
+  calculatedAttributes.skills
+    .filter(skill => skill.mapIsaAttributes.includes(attributeKey))
+    .forEach(skill => {
+      calcCalcAttribute(skill)
+  })
+  calculatedAttributes.increasedSkills = calculatedAttributes.skills.filter((skill) => skill.increased === true).length
 }
 
 function calcReferencedSkills(attributeKey) {
@@ -98,8 +117,8 @@ function calcReferencedSkills(attributeKey) {
       .filter(skill => skill.mapIsaAttributes.includes(attributeKey))
       .forEach(skill => {
         calcSkill(skill)
-    group.increasedSkills = group.skills.filter((skill) => skill.increased === true).length
     })
+    group.increasedSkills = group.skills.filter((skill) => skill.increased === true).length
   })
 }
 
@@ -112,13 +131,25 @@ function calcSkill(skill) {
     sum += attribute.value
   }
   skill.value = Math.round((sum + increasedAttributes)/3)
-
   skill.increased = (skill.value == Math.round((sum)/3) ? false : true)
+}
+
+function calcCalcAttribute(skill) {
+
+  var sum = 0
+  var increasedAttributes = 0
+  for (var index in skill.mapIsaAttributes) {
+    var attribute = attributes.find((attribute) => attribute.key === skill.mapIsaAttributes[index])
+    increasedAttributes += attribute.increased ? 1 : 0
+    sum += attribute.value
+  }
+  skill.value = Math.round((sum + increasedAttributes)/skill.divider)
+  skill.increased = (skill.value == Math.round((sum)/skill.divider) ? false : true)
 }
 
 function increase(attribute) {
   attribute.increased = !attribute.increased
-  calcReferencedSkills(attribute.key)
+  calcEverything(attribute.key)
 }
 
 function toggleFilter() {
@@ -154,6 +185,31 @@ function toggleFilter() {
     <div class="column">
       <h1>Talente</h1>
       <button :class="[showOnlyIncreasedSkills ? 'highlight-button' : '']" @click="toggleFilter()">Nur erhöhte Talente</button>
+
+      <h2>
+        {{ calculatedAttributes.name }}
+        <span :class="[(calculatedAttributes.increasedSkills > 0) ? 'highlight-badge' : 'badge']">{{ calculatedAttributes.increasedSkills }}</span>
+      </h2>
+      <div v-for="skill in calculatedAttributes.skills" :key="skill.key" class="skill-item">
+        <div v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)" :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']">
+          <span class="skill-name">{{ skill.name }}</span>
+          <span class="skill-value">{{ skill.value }}</span>
+          <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
+        </div>
+      </div>
+
+      <h2>
+        {{ combatGroup.name }}
+        <span :class="[(combatGroup.increasedSkills > 0) ? 'highlight-badge' : 'badge']">{{ combatGroup.increasedSkills }}</span>
+      </h2>
+      <div v-for="skill in combatGroup.skills" :key="skill.key" class="skill-item">
+        <div v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)" :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']">
+          <span class="skill-name">{{ skill.name }}</span>
+          <span class="skill-value">{{ skill.value }}</span>
+          <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
+        </div>
+      </div>
+
       <div v-for="group in skillGroups" :key="group.name" class="skill-group">
         <h2>
           {{ group.name }}
