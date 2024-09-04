@@ -25,17 +25,17 @@ const attributes = reactive([
 ])
 
 const skillGroups = reactive([
-  {key: 'koerper', name: 'Körper', skills: [
+  {key: 'koerper', name: 'Körper', increasedSkills: 0, skills: [
     {key: 'akrobatik', name: 'Akrobatik', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false},
     {key: 'athletik', name: 'Athletik', mapIsaAttributes: ['GE', 'KO', 'KK'], value: 8, increased: false},
     {key: 'verborgenesErkennen', name: 'Verborgenes Erkennen', mapIsaAttributes: ['MU', 'KL', 'IN'], value: 8, increased: false}
   ]},
-  {key: 'natur', name: 'Natur', skills: [
+  {key: 'natur', name: 'Natur', increasedSkills: 0, skills: [
     {key: 'faehrtensuche', name: 'Fährtensuche', mapIsaAttributes: ['KL', 'IN', 'KO'], value: 8, increased: false},
     {key: 'fischenAngeln', name: 'Fischen & Angeln', mapIsaAttributes: ['IN', 'FF', 'KK'], value: 8, increased: false},
     {key: 'himmelskunde', name: 'Himmelskunde', mapIsaAttributes: ['KL', 'IN', 'IN'], value: 8, increased: false}
   ]},
-  {key: 'gesellschaft', name: 'Gesellschaft', skills: [
+  {key: 'gesellschaft', name: 'Gesellschaft', increasedSkills: 0, skills: [
     {key: 'einschuechtern', name: 'Einschüchtern', mapIsaAttributes: ['MU', 'CH', 'KK'], value: 8, increased: false},
     {key: 'handel', name: 'Handel', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}, 
     {key: 'schauspielerei', name: 'Schauspielerei', mapIsaAttributes: ['MU', 'KL', 'CH'], value: 8, increased: false}
@@ -58,9 +58,9 @@ function calcReferencedSkills(attributeKey) {
       .filter(skill => skill.mapIsaAttributes.includes(attributeKey))
       .forEach(skill => {
         calcSkill(skill)
+    group.increasedSkills = group.skills.filter((skill) => skill.increased === true).length
     })
   })
-
 }
 
 function calcSkill(skill) {
@@ -107,17 +107,20 @@ function increase(attribute) {
           v-model.number="attribute.value"
           class="attribute-input"
         />
-        <button :class="[attribute.increased ? 'active-button' : '']" @click="increase(attribute)">+</button>
+        <button :class="[attribute.increased ? 'highlight-button' : '']" @click="increase(attribute)">+</button>
       </div>
     </div>
 
     <!-- Column for Skill Groups -->
     <div class="column">
-      <h2>Skill Groups</h2>
+      <h2>Talente</h2>
       <div v-for="group in skillGroups" :key="group.name" class="skill-group">
-        <h3>{{ group.name }}</h3>
+        <h3>
+          {{ group.name }}
+          <span :class="[(group.increasedSkills > 0) ? 'highlight-badge' : 'badge']">{{ group.increasedSkills }}</span>
+        </h3>
         <div v-for="skill in group.skills" :key="skill.key" class="skill-item">
-          <div :class="[skill.increased ? 'skill-info-increased' : 'skill-info']">
+          <div :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']">
             <span class="skill-name">{{ skill.name }}</span>
             <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
             <span class="skill-value">{{ skill.value }}</span>
@@ -153,7 +156,7 @@ function increase(attribute) {
   width: 100%;
 }
 
-.skill-info-increased {
+.skill-info-highlighted {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -165,7 +168,7 @@ function increase(attribute) {
   font-weight: 600; /* Slightly bolder font for emphasis */
 }
 
-.skill-info-increased:hover {
+.skill-info-highlighted:hover {
   background-color: #51cf5f; /* Slightly darker blue on hover */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* More pronounced shadow on hover */
 }
@@ -195,7 +198,7 @@ button {
 }
 
 /* Active state: Change only the background color */
-button.active-button {
+button.highlight-button {
   background-color: #3acf4b; /* Modern blue background for active state */
   color: #713604; /* Change the font color to white when active */
 }
@@ -207,9 +210,28 @@ button:hover {
 }
 
 /* Hover state for active button */
-button.active-button:hover {
+button.highlight-button:hover {
   background-color: #51cf5f; /* Slightly darker blue on hover */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Increase shadow for hover effect */
+}
+
+/* Badge styling for the highlighted skill sum */
+.badge {
+  border: 1px solid #aaa;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+/* Badge styling for the highlighted skill sum */
+.highlight-badge {
+  background-color: #3acf4b;
+  color: #713604;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-left: 10px;
 }
 
 h3, h4 {
