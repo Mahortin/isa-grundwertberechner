@@ -22,17 +22,57 @@ const skillGroups = reactive([
   {key: 'koerper', name: 'Körper', increasedSkills: 0, skills: [
     {key: 'akrobatik', name: 'Akrobatik', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false},
     {key: 'athletik', name: 'Athletik', mapIsaAttributes: ['GE', 'KO', 'KK'], value: 8, increased: false},
-    {key: 'verborgenesErkennen', name: 'Verborgenes Erkennen', mapIsaAttributes: ['MU', 'KL', 'IN'], value: 8, increased: false}
+    {key: 'diebeskunst', name: 'Diebeskunst', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false},
+    {key: 'heimlichkeit', name: 'Heimlichkeit', mapIsaAttributes: ['MU', 'IN', 'GE'], value: 8, increased: false},
+    {key: 'horchen', name: 'Horchen', mapIsaAttributes: ['KL', 'IN', 'KO'], value: 8, increased: false},
+    {key: 'klettern', name: 'Klettern', mapIsaAttributes: ['MU', 'GE', 'KK'], value: 8, increased: false},
+    {key: 'reiten', name: 'Reiten', mapIsaAttributes: ['CH', 'GE', 'KK'], value: 8, increased: false},
+    {key: 'schwimmen', name: 'Schwimmen', mapIsaAttributes: ['GE', 'KO', 'KK'], value: 8, increased: false},
+    {key: 'verborgenesErkennen', name: 'Verborgenes Erkennen', mapIsaAttributes: ['MU', 'KL', 'IN'], value: 8, increased: false}, 
+    {key: 'zechen', name: 'Zechen', mapIsaAttributes: ['IN', 'KO', 'KK'], value: 8, increased: false}
   ]},
   {key: 'natur', name: 'Natur', increasedSkills: 0, skills: [
     {key: 'faehrtensuche', name: 'Fährtensuche', mapIsaAttributes: ['KL', 'IN', 'KO'], value: 8, increased: false},
     {key: 'fischenAngeln', name: 'Fischen & Angeln', mapIsaAttributes: ['IN', 'FF', 'KK'], value: 8, increased: false},
-    {key: 'himmelskunde', name: 'Himmelskunde', mapIsaAttributes: ['KL', 'IN', 'IN'], value: 8, increased: false}
+    {key: 'himmelskunde', name: 'Himmelskunde', mapIsaAttributes: ['KL', 'IN', 'IN'], value: 8, increased: false}, 
+    {key: 'lagerRasten', name: 'Lager & Rasten', mapIsaAttributes: ['IN', 'GE', 'KO'], value: 8, increased: false},
+    {key: 'orientierung', name: 'Orientierung', mapIsaAttributes: ['KL', 'IN', 'IN'], value: 8, increased: false}, 
+    {key: 'pflanzenkunde', name: 'Pflanzenkunde', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
+    {key: 'tierkunde', name: 'Tierkunde', mapIsaAttributes: ['MU', 'KL', 'IN'], value: 8, increased: false}
+  ]},
+  {key: 'handwerk', name: 'Handwerk', increasedSkills: 0, skills: [
+    {key: 'alchemie', name: 'Alchemie', mapIsaAttributes: ['MU', 'KL', 'FF'], value: 8, increased: false},
+    {key: 'bootSeefahrt', name: 'Boot- & Seefahrt', mapIsaAttributes: ['IN', 'GE', 'KO'], value: 8, increased: false},
+    {key: 'fahrzeugLenken', name: 'Fahrzeug lenken', mapIsaAttributes: ['IN', 'CH', 'FF'], value: 8, increased: false}, 
+    {key: 'holzbearbeitung', name: 'Holzbearbeitung', mapIsaAttributes: ['KL', 'FF', 'KK'], value: 8, increased: false},
+    {key: 'kochenBrauen', name: 'Kochen & Brauen', mapIsaAttributes: ['KL', 'FF', 'FF'], value: 8, increased: false}, 
+    {key: 'lehmSteinbearbeitung', name: 'Lehm- & Steinbearbeitung', mapIsaAttributes: ['KL', 'FF', 'FF'], value: 8, increased: false}, 
+    {key: 'malenZeichnen', name: 'Malen & Zeichnen', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
+    {key: 'musizieren', name: 'Musizieren', mapIsaAttributes: ['IN', 'CH', 'FF'], value: 8, increased: false}, 
+    {key: 'schmiedekunst', name: 'Schmiedekunst', mapIsaAttributes: ['FF', 'KO', 'KK'], value: 8, increased: false}, 
+    {key: 'schneiderLederarbeiten', name: 'Schneider- & Lederarbeiten', mapIsaAttributes: ['KL', 'FF', 'KO'], value: 8, increased: false}
   ]},
   {key: 'gesellschaft', name: 'Gesellschaft', increasedSkills: 0, skills: [
     {key: 'einschuechtern', name: 'Einschüchtern', mapIsaAttributes: ['MU', 'CH', 'KK'], value: 8, increased: false},
     {key: 'handel', name: 'Handel', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}, 
-    {key: 'schauspielerei', name: 'Schauspielerei', mapIsaAttributes: ['MU', 'KL', 'CH'], value: 8, increased: false}
+    {key: 'schauspielerei', name: 'Schauspielerei', mapIsaAttributes: ['MU', 'KL', 'CH'], value: 8, increased: false}, 
+    {key: 'standeswissen', name: 'Standeswissen', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}, 
+    {key: 'tanzen', name: 'Tanzen', mapIsaAttributes: ['CH', 'GE', 'GE'], value: 8, increased: false}, 
+    {key: 'ueberreden', name: 'Überreden', mapIsaAttributes: ['MU', 'IN', 'CH'], value: 8, increased: false}, 
+    {key: 'ueberzeugen', name: 'Überzeugen', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}
+  ]}, 
+  {key: 'wissen', name: 'Wissen', increasedSkills: 0, skills: [
+    {key: 'architekt', name: 'Architekt', mapIsaAttributes: ['KL', 'KL', 'FF'], value: 8, increased: false},
+    {key: 'geographie', name: 'Geographie', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false},
+    {key: 'geschichtswissen', name: 'Geschichtswissen', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}, 
+    {key: 'goetterKulte', name: 'Götter & Kulte', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false},
+    {key: 'heilkundeGeist', name: '(Heil-)Kunde des Geistes', mapIsaAttributes: ['KL', 'IN', 'CH'], value: 8, increased: false}, 
+    {key: 'heilkundeKoerper', name: '(Heil-)Kunde des Körpers', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
+    {key: 'heilkundeSaefte', name: '(Heil-)Kunde der Säfte', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}, 
+    {key: 'kriegskunst', name: 'Kriegskunst', mapIsaAttributes: ['MU', 'KL', 'CH'], value: 8, increased: false}, 
+    {key: 'magiekunde', name: 'Magiekunde', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}, 
+    {key: 'rechnenPhysik', name: 'Rechnen & Physik', mapIsaAttributes: ['KL', 'IN', 'FF'], value: 8, increased: false}, 
+    {key: 'rechtsStaatskunst', name: 'Rechts- & Staatskunst', mapIsaAttributes: ['KL', 'KL', 'IN'], value: 8, increased: false}
   ]}
 ])
 
