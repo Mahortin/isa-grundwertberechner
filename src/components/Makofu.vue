@@ -91,7 +91,7 @@ function increase(attribute) {
 <div class="container">
     <!-- Column for Attributes -->
     <div class="column">
-      <h2>Attributes</h2>
+      <h1>Eigenschaften</h1>
       <div v-for="attribute in attributes" :key="attribute.key" class="attribute-item">
         <div class="attribute-info">
           <span class="attribute-key">{{ attribute.key }}</span>
@@ -113,12 +113,12 @@ function increase(attribute) {
 
     <!-- Column for Skill Groups -->
     <div class="column">
-      <h2>Talente</h2>
+      <h1>Talente</h1>
       <div v-for="group in skillGroups" :key="group.name" class="skill-group">
-        <h3>
+        <h2>
           {{ group.name }}
           <span :class="[(group.increasedSkills > 0) ? 'highlight-badge' : 'badge']">{{ group.increasedSkills }}</span>
-        </h3>
+        </h2>
         <div v-for="skill in group.skills" :key="skill.key" class="skill-item">
           <div :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']">
             <span class="skill-name">{{ skill.name }}</span>
