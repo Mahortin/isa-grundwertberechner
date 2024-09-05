@@ -377,65 +377,109 @@ const combatGroup = reactive({
       key: 'dolchFechtwaffen',
       name: 'Dolch- & Fechtwaffen',
       mapIsaAttributes: ['MU', 'FF', 'GE'],
-      value: 8,
-      increased: false
-    },
-    {
-      key: 'hiebKettenwaffen',
-      name: 'Hieb- & Kettenwaffen',
-      mapIsaAttributes: ['MU', 'KO', 'KK'],
-      value: 8,
-      increased: false
-    },
-    {
-      key: 'raufenRingen',
-      name: 'Raufen & Ringen',
-      mapIsaAttributes: ['MU', 'GE', 'KK'],
-      value: 8,
-      increased: false
-    },
-    {
-      key: 'saebelSchwerter',
-      name: 'Säbel & Schwerter',
-      mapIsaAttributes: ['MU', 'GE', 'KK'],
-      value: 8,
-      increased: false
-    },
-    {
-      key: 'speerStabwaffen',
-      name: 'Speer & Stabwaffen',
-      mapIsaAttributes: ['MU', 'FF', 'KK'],
-      value: 8,
-      increased: false
-    },
-    {
-      key: 'armbrust',
-      name: 'Armbrust',
-      mapIsaAttributes: ['IN', 'FF', 'KK'],
-      value: 8,
-      increased: false
-    },
-    {
-      key: 'bogen',
-      name: 'Bogen',
-      mapIsaAttributes: ['FF', 'GE', 'KK'],
-      value: 8,
-      increased: false
-    },
-    {
-      key: 'torsionswaffen',
-      name: 'Torsionswaffen',
-      mapIsaAttributes: ['KL', 'IN', 'FF'],
-      value: 8,
-      increased: false
-    },
-    {
-      key: 'wurfSchleuderwaffen',
-      name: 'Wurf- & Schleuderwaffen',
-      mapIsaAttributes: ['FF', 'GE', 'KK'],
+      highestAt: {
+        value: 8,
+        mapIsaAttributes: ['MU', 'FF'],
+        increased: false
+      },
+      highestPa: {
+        value: 8,
+        mapIsaAttributes: ['IN', 'FF'],
+        increased: false
+      },
+      attackCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['MU', 'FF'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['MU', 'GE'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'GE'],
+          increased: false
+        }
+      ],
+      paCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'FF'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'GE'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'GE'],
+          increased: false
+        }
+      ],
       value: 8,
       increased: false
     }
+    // {
+    //   key: 'hiebKettenwaffen',
+    //   name: 'Hieb- & Kettenwaffen',
+    //   mapIsaAttributes: ['MU', 'KO', 'KK'],
+    //   value: 8,
+    //   increased: false
+    // },
+    // {
+    //   key: 'raufenRingen',
+    //   name: 'Raufen & Ringen',
+    //   mapIsaAttributes: ['MU', 'GE', 'KK'],
+    //   value: 8,
+    //   increased: false
+    // },
+    // {
+    //   key: 'saebelSchwerter',
+    //   name: 'Säbel & Schwerter',
+    //   mapIsaAttributes: ['MU', 'GE', 'KK'],
+    //   value: 8,
+    //   increased: false
+    // },
+    // {
+    //   key: 'speerStabwaffen',
+    //   name: 'Speer & Stabwaffen',
+    //   mapIsaAttributes: ['MU', 'FF', 'KK'],
+    //   value: 8,
+    //   increased: false
+    // },
+    // {
+    //   key: 'armbrust',
+    //   name: 'Armbrust',
+    //   mapIsaAttributes: ['IN', 'FF', 'KK'],
+    //   value: 8,
+    //   increased: false
+    // },
+    // {
+    //   key: 'bogen',
+    //   name: 'Bogen',
+    //   mapIsaAttributes: ['FF', 'GE', 'KK'],
+    //   value: 8,
+    //   increased: false
+    // },
+    // {
+    //   key: 'torsionswaffen',
+    //   name: 'Torsionswaffen',
+    //   mapIsaAttributes: ['KL', 'IN', 'FF'],
+    //   value: 8,
+    //   increased: false
+    // },
+    // {
+    //   key: 'wurfSchleuderwaffen',
+    //   name: 'Wurf- & Schleuderwaffen',
+    //   mapIsaAttributes: ['FF', 'GE', 'KK'],
+    //   value: 8,
+    //   increased: false
+    // }
   ]
 })
 
@@ -490,9 +534,10 @@ const calculatedAttributes = reactive({
 function calcEverything(key) {
   calcReferencedSkills(key)
   calcReferencedCalcAttributes(key)
+  calcReferencedCombatSkills(key)
 }
 
-function calcReferencedCalcAttributes(attributeKey) {
+function calcReferencedCalcAttributes(attributeKey: string) {
   calculatedAttributes.skills
     .filter((skill) => skill.mapIsaAttributes.includes(attributeKey))
     .forEach((skill) => {
@@ -503,7 +548,19 @@ function calcReferencedCalcAttributes(attributeKey) {
   ).length
 }
 
-function calcReferencedSkills(attributeKey) {
+function calcReferencedCombatSkills(attributeKey: string) {
+  combatGroup.skills
+    .filter((skill) => skill.mapIsaAttributes.includes(attributeKey))
+    .forEach((skill) => {
+      // alert('reached skill: ' + skill.name)
+      calcCombatSkill(skill, attributeKey)
+    })
+  combatGroup.increasedSkills = combatGroup.skills.filter(
+    (skill) => skill.increased === true
+  ).length
+}
+
+function calcReferencedSkills(attributeKey: string) {
   skillGroups.forEach((group) => {
     group.skills
       .filter((skill) => skill.mapIsaAttributes.includes(attributeKey))
@@ -521,6 +578,15 @@ function calcSkill(skill) {
     var attribute = attributes.find((attribute) => attribute.key === skill.mapIsaAttributes[index])
     increasedAttributes += attribute.increased ? 1 : 0
     sum += attribute.value
+
+    // alert(
+    //   'reached attribute ' +
+    //     attribute.name +
+    //     ' which is increased:' +
+    //     attribute?.increased +
+    //     ' for skill ' +
+    //     skill.name
+    // )
   }
   skill.value = Math.round((sum + increasedAttributes) / 3)
   skill.increased = skill.value == Math.round(sum / 3) ? false : true
@@ -536,6 +602,54 @@ function calcCalcAttribute(skill) {
   }
   skill.value = Math.round((sum + increasedAttributes) / skill.divider)
   skill.increased = skill.value == Math.round(sum / skill.divider) ? false : true
+}
+
+function calcCombatSkill(skill, attributeKey) {
+  var sum = 0
+  var increasedAttributes = 0
+  skill.attackCombinations
+    .filter((attackCombination) => attackCombination.mapIsaAttributes.includes(attributeKey))
+    .forEach((attackCombination) => {
+      sum = 0
+      increasedAttributes = 0
+      for (var index in attackCombination.mapIsaAttributes) {
+        var attribute = attributes.find(
+          (attribute) => attribute.key === attackCombination.mapIsaAttributes[index]
+        )
+        increasedAttributes += attribute.increased ? 1 : 0
+        sum += attribute.value
+        // alert(
+        //   'reached attribute ' +
+        //     attribute.name +
+        //     ' which is increased:' +
+        //     attribute?.increased +
+        //     ' for combination ' +
+        //     attackCombination.mapIsaAttributes +
+        //     ' has sum: ' +
+        //     sum +
+        //     'increasedAttributes' +
+        //     increasedAttributes
+        // )
+      }
+      attackCombination.value = Math.round((sum + increasedAttributes) / 2)
+      attackCombination.increased = attackCombination.value == Math.round(sum / 2) ? false : true
+      // alert(
+      //   'Math.round((sum + increasedAttributes) / 2 ->' +
+      //     Math.round((sum + increasedAttributes) / 2) +
+      //     ' Math.round(sum / 2) -> ' +
+      //     Math.round(sum / 2) +
+      //     'attackCombination.value -> ' +
+      //     attackCombination.value +
+      //     'attackCombination.increased' +
+      //     attackCombination.increased
+      // )
+    })
+  skill.attackCombinations.forEach((attackCombination) => {
+    skill.highestAt =
+      skill.highestAt.value < attackCombination.value ? attackCombination : skill.highestAt
+  })
+
+  skill.increased = skill.highestAt.increased ? true : false
 }
 
 function increase(attribute) {
@@ -611,8 +725,10 @@ function toggleFilter() {
           :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']"
         >
           <span class="skill-name">{{ skill.name }}</span>
-          <span class="skill-value">{{ skill.value }}</span>
-          <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
+          <span class="skill-value">{{ skill.highestAt?.value }}</span>
+          <span class="skill-attributes" :title="skill.mapIsaAttributes">{{
+            skill.highestAt?.mapIsaAttributes
+          }}</span>
         </div>
       </div>
 
