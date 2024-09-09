@@ -2,6 +2,7 @@
 import { ref, reactive, computed } from 'vue'
 
 const showOnlyIncreasedSkills = ref(false)
+const showAssociatedAttributes = ref(false)
 
 const attributes = reactive([
   { key: 'MU', name: 'Mut', value: 8, increased: false },
@@ -976,8 +977,12 @@ function increaseAttribute(attribute) {
   calcEverything(attribute.key)
 }
 
-function toggleFilter() {
+function toggleShowOnlyIncreasedSkills() {
   showOnlyIncreasedSkills.value = !showOnlyIncreasedSkills.value
+}
+
+function toggleShowAssociatedAttributes() {
+  showAssociatedAttributes.value = !showAssociatedAttributes.value
 }
 </script>
 
@@ -1011,8 +1016,18 @@ function toggleFilter() {
     <!-- Column for calculated values -->
     <div class="column">
       <h1>Talente</h1>
-      <button :class="[showOnlyIncreasedSkills ? 'highlight-button' : '']" @click="toggleFilter()">
+      <button
+        :class="[showOnlyIncreasedSkills ? 'highlight-button' : '']"
+        @click="toggleShowOnlyIncreasedSkills()"
+      >
         Nur erhöhte Talente
+      </button>
+
+      <button
+        :class="[showAssociatedAttributes ? 'highlight-button' : '']"
+        @click="toggleShowAssociatedAttributes()"
+      >
+        Talentattribute anzeigen
       </button>
 
       <!-- combined attributes -->
@@ -1029,7 +1044,9 @@ function toggleFilter() {
         >
           <span class="skill-name">{{ skill.name }}</span>
           <span class="skill-value">{{ skill.value }}</span>
-          <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
+          <span v-if="showAssociatedAttributes" class="skill-attributes">{{
+            skill.mapIsaAttributes
+          }}</span>
         </div>
       </div>
 
@@ -1048,14 +1065,17 @@ function toggleFilter() {
           <span class="skill-name" :class="[skill.increased ? 'highlighted' : '']">{{
             skill.name
           }}</span>
-          <span class="skill-attributes" :title="skill.mapIsaAttributes.toString()">{{
-            skill.mapIsaAttributes
-          }}</span>
           <span class="skill-value" :class="[skill.highestAt?.increased ? 'highlighted' : '']"
             >AT: {{ skill.highestAt?.value }}</span
           >
           <span class="skill-value" :class="[skill.highestPa?.increased ? 'highlighted' : '']"
             >PA: {{ skill.highestPa?.value }}</span
+          >
+          <span
+            class="skill-attributes"
+            v-if="showAssociatedAttributes"
+            :title="skill.mapIsaAttributes.toString()"
+            >{{ skill.mapIsaAttributes }}</span
           >
         </div>
       </div>
@@ -1075,7 +1095,9 @@ function toggleFilter() {
           >
             <span class="skill-name">{{ skill.name }}</span>
             <span class="skill-value">{{ skill.value }}</span>
-            <span class="skill-attributes">{{ skill.mapIsaAttributes }}</span>
+            <span v-if="showAssociatedAttributes" class="skill-attributes">{{
+              skill.mapIsaAttributes
+            }}</span>
           </div>
         </div>
       </div>
