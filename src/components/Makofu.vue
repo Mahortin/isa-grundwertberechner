@@ -2,7 +2,6 @@
 import { ref, reactive, computed } from 'vue'
 
 const showOnlyIncreasedSkills = ref(false)
-const myTest = ref(false)
 
 const attributes = reactive([
   { key: 'MU', name: 'Mut', value: 8, increased: false },
@@ -1049,7 +1048,7 @@ function toggleFilter() {
           <span class="skill-name" :class="[skill.increased ? 'highlighted' : '']">{{
             skill.name
           }}</span>
-          <span class="skill-attributes" :title="skill.mapIsaAttributes">{{
+          <span class="skill-attributes" :title="skill.mapIsaAttributes.toString()">{{
             skill.mapIsaAttributes
           }}</span>
           <span class="skill-value" :class="[skill.highestAt?.increased ? 'highlighted' : '']"
