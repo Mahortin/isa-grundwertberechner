@@ -376,7 +376,7 @@ const combatGroup = reactive({
     {
       key: 'dolchFechtwaffen',
       name: 'Dolch- & Fechtwaffen',
-      mapIsaAttributes: ['MU', 'FF', 'GE'],
+      mapIsaAttributes: ['MU', 'IN', 'FF', 'GE'],
       highestAt: {
         value: 8,
         mapIsaAttributes: ['MU', 'FF'],
@@ -421,70 +421,413 @@ const combatGroup = reactive({
           increased: false
         }
       ],
-      value: 8,
+      increased: false
+    },
+    {
+      key: 'hiebKettenwaffen',
+      name: 'Hieb- & Kettenwaffen',
+      mapIsaAttributes: ['MU', 'IN', 'KO', 'KK'],
+      highestAt: {
+        value: 8,
+        mapIsaAttributes: ['MU', 'KO'],
+        increased: false
+      },
+      highestPa: {
+        value: 8,
+        mapIsaAttributes: ['IN', 'KO'],
+        increased: false
+      },
+      attackCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['MU', 'KO'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['MU', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['KO', 'KK'],
+          increased: false
+        }
+      ],
+      paCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'KO'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['KO', 'KK'],
+          increased: false
+        }
+      ],
+      increased: false
+    },
+    {
+      key: 'raufenRingen',
+      name: 'Raufen & Ringen',
+      mapIsaAttributes: ['MU', 'IN', 'GE', 'KK'],
+      highestAt: {
+        value: 8,
+        mapIsaAttributes: ['MU', 'GE'],
+        increased: false
+      },
+      highestPa: {
+        value: 8,
+        mapIsaAttributes: ['IN', 'GE'],
+        increased: false
+      },
+      attackCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['MU', 'GE'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['MU', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['GE', 'KK'],
+          increased: false
+        }
+      ],
+      paCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'GE'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['GE', 'KK'],
+          increased: false
+        }
+      ],
+      increased: false
+    },
+    {
+      key: 'saebelSchwerter',
+      name: 'Säbel & Schwerter',
+      mapIsaAttributes: ['MU', 'IN', 'GE', 'KK'],
+      highestAt: {
+        value: 8,
+        mapIsaAttributes: ['MU', 'GE'],
+        increased: false
+      },
+      highestPa: {
+        value: 8,
+        mapIsaAttributes: ['IN', 'GE'],
+        increased: false
+      },
+      attackCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['MU', 'GE'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['MU', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['GE', 'KK'],
+          increased: false
+        }
+      ],
+      paCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'GE'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['GE', 'KK'],
+          increased: false
+        }
+      ],
+      increased: false
+    },
+    {
+      key: 'speerStabwaffen',
+      name: 'Speer & Stabwaffen',
+      mapIsaAttributes: ['MU', 'IN', 'FF', 'KK'],
+      highestAt: {
+        value: 8,
+        mapIsaAttributes: ['MU', 'FF'],
+        increased: false
+      },
+      highestPa: {
+        value: 8,
+        mapIsaAttributes: ['IN', 'FF'],
+        increased: false
+      },
+      attackCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['MU', 'FF'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['MU', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'KK'],
+          increased: false
+        }
+      ],
+      paCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'FF'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'KK'],
+          increased: false
+        }
+      ],
+      increased: false
+    },
+    {
+      key: 'armbrust',
+      name: 'Armbrust',
+      mapIsaAttributes: ['IN', 'FF', 'KK'],
+      highestAt: {
+        value: 8,
+        mapIsaAttributes: ['IN', 'FF'],
+        increased: false
+      },
+      highestPa: {
+        value: 8,
+        mapIsaAttributes: ['IN', 'FF'],
+        increased: false
+      },
+      attackCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'FF'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'KK'],
+          increased: false
+        }
+      ],
+      paCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'FF'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'KK'],
+          increased: false
+        }
+      ],
+      increased: false
+    },
+    {
+      key: 'bogen',
+      name: 'Bogen',
+      mapIsaAttributes: ['FF', 'GE', 'KK'],
+      highestAt: {
+        value: 8,
+        mapIsaAttributes: ['FF', 'GE'],
+        increased: false
+      },
+      highestPa: {
+        value: 8,
+        mapIsaAttributes: ['FF', 'GE'],
+        increased: false
+      },
+      attackCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'GE'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['GE', 'KK'],
+          increased: false
+        }
+      ],
+      paCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'GE'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['GE', 'KK'],
+          increased: false
+        }
+      ],
+      increased: false
+    },
+    {
+      key: 'torsionswaffen',
+      name: 'Torsionswaffen',
+      mapIsaAttributes: ['KL', 'IN', 'FF'],
+      highestAt: {
+        value: 8,
+        mapIsaAttributes: ['KL', 'IN'],
+        increased: false
+      },
+      highestPa: {
+        value: 8,
+        mapIsaAttributes: ['KL', 'IN'],
+        increased: false
+      },
+      attackCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['KL', 'IN'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['KL', 'FF'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'FF'],
+          increased: false
+        }
+      ],
+      paCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['KL', 'IN'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['KL', 'FF'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['IN', 'FF'],
+          increased: false
+        }
+      ],
+      increased: false
+    },
+    {
+      key: 'wurfSchleuderwaffen',
+      name: 'Wurf- & Schleuderwaffen',
+      mapIsaAttributes: ['FF', 'GE', 'KK'],
+      highestAt: {
+        value: 8,
+        mapIsaAttributes: ['FF', 'GE'],
+        increased: false
+      },
+      highestPa: {
+        value: 8,
+        mapIsaAttributes: ['FF', 'GE'],
+        increased: false
+      },
+      attackCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'GE'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['GE', 'KK'],
+          increased: false
+        }
+      ],
+      paCombinations: [
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'GE'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['FF', 'KK'],
+          increased: false
+        },
+        {
+          value: 8,
+          mapIsaAttributes: ['GE', 'KK'],
+          increased: false
+        }
+      ],
       increased: false
     }
-    // {
-    //   key: 'hiebKettenwaffen',
-    //   name: 'Hieb- & Kettenwaffen',
-    //   mapIsaAttributes: ['MU', 'KO', 'KK'],
-    //   value: 8,
-    //   increased: false
-    // },
-    // {
-    //   key: 'raufenRingen',
-    //   name: 'Raufen & Ringen',
-    //   mapIsaAttributes: ['MU', 'GE', 'KK'],
-    //   value: 8,
-    //   increased: false
-    // },
-    // {
-    //   key: 'saebelSchwerter',
-    //   name: 'Säbel & Schwerter',
-    //   mapIsaAttributes: ['MU', 'GE', 'KK'],
-    //   value: 8,
-    //   increased: false
-    // },
-    // {
-    //   key: 'speerStabwaffen',
-    //   name: 'Speer & Stabwaffen',
-    //   mapIsaAttributes: ['MU', 'FF', 'KK'],
-    //   value: 8,
-    //   increased: false
-    // },
-    // {
-    //   key: 'armbrust',
-    //   name: 'Armbrust',
-    //   mapIsaAttributes: ['IN', 'FF', 'KK'],
-    //   value: 8,
-    //   increased: false
-    // },
-    // {
-    //   key: 'bogen',
-    //   name: 'Bogen',
-    //   mapIsaAttributes: ['FF', 'GE', 'KK'],
-    //   value: 8,
-    //   increased: false
-    // },
-    // {
-    //   key: 'torsionswaffen',
-    //   name: 'Torsionswaffen',
-    //   mapIsaAttributes: ['KL', 'IN', 'FF'],
-    //   value: 8,
-    //   increased: false
-    // },
-    // {
-    //   key: 'wurfSchleuderwaffen',
-    //   name: 'Wurf- & Schleuderwaffen',
-    //   mapIsaAttributes: ['FF', 'GE', 'KK'],
-    //   value: 8,
-    //   increased: false
-    // }
   ]
 })
 
-const calculatedAttributes = reactive({
-  key: 'calcAttributes',
+const combinedAttributes = reactive({
+  key: 'combinedAttributes',
   name: 'Abgeleitete Eigenschaften',
   increasedSkills: 0,
   skills: [
@@ -500,7 +843,7 @@ const calculatedAttributes = reactive({
       key: 'mumm',
       name: 'Mumm',
       mapIsaAttributes: ['MU', 'MU', 'KL'],
-      value: 8,
+      value: 5,
       divider: 5,
       increased: false
     },
@@ -508,7 +851,7 @@ const calculatedAttributes = reactive({
       key: 'bewegung',
       name: 'Bewegung',
       mapIsaAttributes: ['GE', 'GE', 'IN'],
-      value: 8,
+      value: 5,
       divider: 5,
       increased: false
     },
@@ -532,23 +875,23 @@ const calculatedAttributes = reactive({
 })
 
 function calcEverything(key) {
-  calcReferencedSkills(key)
-  calcReferencedCalcAttributes(key)
-  calcReferencedCombatSkills(key)
+  calcAssociatedSkills(key)
+  calcReferencedCombinedAttributes(key)
+  calcAssociatedCombatSkills(key)
 }
 
-function calcReferencedCalcAttributes(attributeKey: string) {
-  calculatedAttributes.skills
+function calcReferencedCombinedAttributes(attributeKey: string) {
+  combinedAttributes.skills
     .filter((skill) => skill.mapIsaAttributes.includes(attributeKey))
     .forEach((skill) => {
-      calcCalcAttribute(skill)
+      calcCombinedAttribute(skill)
     })
-  calculatedAttributes.increasedSkills = calculatedAttributes.skills.filter(
+  combinedAttributes.increasedSkills = combinedAttributes.skills.filter(
     (skill) => skill.increased === true
   ).length
 }
 
-function calcReferencedCombatSkills(attributeKey: string) {
+function calcAssociatedCombatSkills(attributeKey: string) {
   combatGroup.skills
     .filter((skill) => skill.mapIsaAttributes.includes(attributeKey))
     .forEach((skill) => {
@@ -560,7 +903,7 @@ function calcReferencedCombatSkills(attributeKey: string) {
   ).length
 }
 
-function calcReferencedSkills(attributeKey: string) {
+function calcAssociatedSkills(attributeKey: string) {
   skillGroups.forEach((group) => {
     group.skills
       .filter((skill) => skill.mapIsaAttributes.includes(attributeKey))
@@ -578,21 +921,12 @@ function calcSkill(skill) {
     var attribute = attributes.find((attribute) => attribute.key === skill.mapIsaAttributes[index])
     increasedAttributes += attribute.increased ? 1 : 0
     sum += attribute.value
-
-    // alert(
-    //   'reached attribute ' +
-    //     attribute.name +
-    //     ' which is increased:' +
-    //     attribute?.increased +
-    //     ' for skill ' +
-    //     skill.name
-    // )
   }
   skill.value = Math.round((sum + increasedAttributes) / 3)
   skill.increased = skill.value == Math.round(sum / 3) ? false : true
 }
 
-function calcCalcAttribute(skill) {
+function calcCombinedAttribute(skill) {
   var sum = 0
   var increasedAttributes = 0
   for (var index in skill.mapIsaAttributes) {
@@ -605,54 +939,40 @@ function calcCalcAttribute(skill) {
 }
 
 function calcCombatSkill(skill, attributeKey) {
-  var sum = 0
-  var increasedAttributes = 0
-  skill.attackCombinations
-    .filter((attackCombination) => attackCombination.mapIsaAttributes.includes(attributeKey))
-    .forEach((attackCombination) => {
+  calculateHighestAttackOrBlock(skill.attackCombinations, attributeKey)
+  calculateHighestAttackOrBlock(skill.paCombinations, attributeKey)
+  skill.attackCombinations.forEach((combination) => {
+    skill.highestAt = skill.highestAt.value < combination.value ? combination : skill.highestAt
+  })
+  skill.paCombinations.forEach((combination) => {
+    skill.highestPa = skill.highestPa.value < combination.value ? combination : skill.highestPa
+  })
+
+  // check if skill increased
+  skill.increased = skill.highestAt.increased || skill.highestPa.increased ? true : false
+}
+
+function calculateHighestAttackOrBlock(combinations, attributeKey) {
+  var sum
+  var increasedAttributes
+  combinations
+    .filter((combination) => combination.mapIsaAttributes.includes(attributeKey))
+    .forEach((combination) => {
       sum = 0
       increasedAttributes = 0
-      for (var index in attackCombination.mapIsaAttributes) {
+      for (var index in combination.mapIsaAttributes) {
         var attribute = attributes.find(
-          (attribute) => attribute.key === attackCombination.mapIsaAttributes[index]
+          (attribute) => attribute.key === combination.mapIsaAttributes[index]
         )
         increasedAttributes += attribute.increased ? 1 : 0
         sum += attribute.value
-        // alert(
-        //   'reached attribute ' +
-        //     attribute.name +
-        //     ' which is increased:' +
-        //     attribute?.increased +
-        //     ' for combination ' +
-        //     attackCombination.mapIsaAttributes +
-        //     ' has sum: ' +
-        //     sum +
-        //     'increasedAttributes' +
-        //     increasedAttributes
-        // )
       }
-      attackCombination.value = Math.round((sum + increasedAttributes) / 2)
-      attackCombination.increased = attackCombination.value == Math.round(sum / 2) ? false : true
-      // alert(
-      //   'Math.round((sum + increasedAttributes) / 2 ->' +
-      //     Math.round((sum + increasedAttributes) / 2) +
-      //     ' Math.round(sum / 2) -> ' +
-      //     Math.round(sum / 2) +
-      //     'attackCombination.value -> ' +
-      //     attackCombination.value +
-      //     'attackCombination.increased' +
-      //     attackCombination.increased
-      // )
+      combination.value = Math.round((sum + increasedAttributes) / 2)
+      combination.increased = combination.value == Math.round(sum / 2) ? false : true
     })
-  skill.attackCombinations.forEach((attackCombination) => {
-    skill.highestAt =
-      skill.highestAt.value < attackCombination.value ? attackCombination : skill.highestAt
-  })
-
-  skill.increased = skill.highestAt.increased ? true : false
 }
 
-function increase(attribute) {
+function increaseAttribute(attribute) {
   attribute.increased = !attribute.increased
   calcEverything(attribute.key)
 }
@@ -682,27 +1002,28 @@ function toggleFilter() {
         />
         <button
           :class="[attribute.increased ? 'highlight-button' : '']"
-          @click="increase(attribute)"
+          @click="increaseAttribute(attribute)"
         >
           +
         </button>
       </div>
     </div>
 
-    <!-- Column for Skill Groups -->
+    <!-- Column for calculated values -->
     <div class="column">
       <h1>Talente</h1>
       <button :class="[showOnlyIncreasedSkills ? 'highlight-button' : '']" @click="toggleFilter()">
         Nur erhöhte Talente
       </button>
 
+      <!-- combined attributes -->
       <h2>
-        {{ calculatedAttributes.name }}
-        <span :class="[calculatedAttributes.increasedSkills > 0 ? 'highlight-badge' : 'badge']">{{
-          calculatedAttributes.increasedSkills
+        {{ combinedAttributes.name }}
+        <span :class="[combinedAttributes.increasedSkills > 0 ? 'highlight-badge' : 'badge']">{{
+          combinedAttributes.increasedSkills
         }}</span>
       </h2>
-      <div v-for="skill in calculatedAttributes.skills" :key="skill.key" class="skill-item">
+      <div v-for="skill in combinedAttributes.skills" :key="skill.key" class="skill-item">
         <div
           v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)"
           :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']"
@@ -713,6 +1034,7 @@ function toggleFilter() {
         </div>
       </div>
 
+      <!-- combat skills -->
       <h2>
         {{ combatGroup.name }}
         <span :class="[combatGroup.increasedSkills > 0 ? 'highlight-badge' : 'badge']">{{
@@ -722,16 +1044,24 @@ function toggleFilter() {
       <div v-for="skill in combatGroup.skills" :key="skill.key" class="skill-item">
         <div
           v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)"
-          :class="[skill.increased ? 'skill-info-highlighted' : 'skill-info']"
+          class="skill-info"
         >
-          <span class="skill-name">{{ skill.name }}</span>
-          <span class="skill-value">{{ skill.highestAt?.value }}</span>
-          <span class="skill-attributes" :title="skill.mapIsaAttributes">{{
-            skill.highestAt?.mapIsaAttributes
+          <span class="skill-name" :class="[skill.increased ? 'highlighted' : '']">{{
+            skill.name
           }}</span>
+          <span class="skill-attributes" :title="skill.mapIsaAttributes">{{
+            skill.mapIsaAttributes
+          }}</span>
+          <span class="skill-value" :class="[skill.highestAt?.increased ? 'highlighted' : '']"
+            >AT: {{ skill.highestAt?.value }}</span
+          >
+          <span class="skill-value" :class="[skill.highestPa?.increased ? 'highlighted' : '']"
+            >PA: {{ skill.highestPa?.value }}</span
+          >
         </div>
       </div>
 
+      <!-- all other skills -->
       <div v-for="group in skillGroups" :key="group.name" class="skill-group">
         <h2>
           {{ group.name }}
@@ -778,6 +1108,20 @@ function toggleFilter() {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.highlighted {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3acf4b; /* Slightly darker greenish background on hover */
+  color: #713604; /* Change the font color to white when active */
+  border-radius: 8px; /* Rounded corners for a modern feel */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transitions */
+  font-weight: 600; /* Slightly bolder font for emphasis */
 }
 
 .skill-info-highlighted {
