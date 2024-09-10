@@ -874,7 +874,16 @@ const combinedAttributes = reactive({
   ]
 })
 
-function calcEverything(key) {
+function calcEverything(attribute) {
+  // problem: last attribute to calc roudn wins if attribute is set or not
+  attributes.forEach((attriubte) => {
+    calcAssociatedSkills(attriubte.key)
+    calcReferencedCombinedAttributes(attriubte.key)
+    calcAssociatedCombatSkills(attriubte.key)
+  })
+}
+
+function calcEverythingAssociated(key) {
   calcAssociatedSkills(key)
   calcReferencedCombinedAttributes(key)
   calcAssociatedCombatSkills(key)
@@ -922,20 +931,24 @@ function calcSkill(skill) {
     increasedAttributes += attribute.increased ? 1 : 0
     sum += attribute.value
   }
-  skill.value = Math.round((sum + increasedAttributes) / 3)
-  skill.increased = skill.value == Math.round(sum / 3) ? false : true
+  skill.value = Math.round(sum / 3)
+  skill.increased = Math.round(increasedAttributes / 3) == 0 ? false : true
 }
 
-function calcCombinedAttribute(skill) {
-  var sum = 0
+function calcCombinedAttribute(combAttr) {
   var increasedAttributes = 0
-  for (var index in skill.mapIsaAttributes) {
-    var attribute = attributes.find((attribute) => attribute.key === skill.mapIsaAttributes[index])
+  var sum = 0
+  for (var index in combAttr.mapIsaAttributes) {
+    var attribute = attributes.find(
+      (attribute) => attribute.key === combAttr.mapIsaAttributes[index]
+    )
     increasedAttributes += attribute.increased ? 1 : 0
     sum += attribute.value
   }
-  skill.value = Math.round((sum + increasedAttributes) / skill.divider)
-  skill.increased = skill.value == Math.round(sum / skill.divider) ? false : true
+  combAttr.value = Math.round(sum / combAttr.divider)
+  // combinedAttributes needs a more complicated check due to possible higher divider values
+  combAttr.increased =
+    combAttr.value == Math.round((sum - increasedAttributes) / combAttr.divider) ? false : true
 }
 
 function calcCombatSkill(skill, attributeKey) {
@@ -967,14 +980,22 @@ function calculateHighestAttackOrBlock(combinations, attributeKey) {
         increasedAttributes += attribute.increased ? 1 : 0
         sum += attribute.value
       }
-      combination.value = Math.round((sum + increasedAttributes) / 2)
-      combination.increased = combination.value == Math.round(sum / 2) ? false : true
+      combination.value = Math.round(sum / 2)
+      combination.increased = increasedAttributes > 0 ? true : false
     })
 }
 
 function increaseAttribute(attribute) {
   attribute.increased = !attribute.increased
-  calcEverything(attribute.key)
+  attribute.value = attribute.increased ? attribute.value + 1 : attribute.value - 1
+  // calcEverythingAssociated(attribute.key)
+  calcEverythingAssociated(attribute.key)
+}
+
+function setAttribute(attribute) {
+  attribute.increased = false
+  calcEverythingAssociated(attribute.key)
+  calcEverythingAssociated(attribute.key)
 }
 
 function toggleShowOnlyIncreasedSkills() {
@@ -1000,9 +1021,9 @@ function toggleShowAssociatedAttributes() {
           type="number"
           min="8"
           max="16"
-          @change="calcEverything(attribute.key)"
+          @change="setAttribute(attribute)"
           v-model.number="attribute.value"
-          class="attribute-input"
+          :class="[attribute.increased ? 'attribute-input-highlighted' : 'attribute-input']"
         />
         <button
           :class="[attribute.increased ? 'highlight-button' : '']"
