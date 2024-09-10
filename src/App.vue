@@ -1160,7 +1160,7 @@ function toggleShowAssociatedAttributes() {
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease; /* Smooth transitions */
-  font-weight: 600; /* Slightly bolder font for emphasis */
+  font-weight: bold; /* bold font for emphasis */
   width: 100%;
 }
 
@@ -1175,7 +1175,7 @@ function toggleShowAssociatedAttributes() {
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease; /* Smooth transitions */
-  font-weight: 600; /* Slightly bolder font for emphasis */
+  font-weight: bold; /* bold font for emphasis */
   width: 60%;
 }
 
@@ -1190,7 +1190,7 @@ function toggleShowAssociatedAttributes() {
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease; /* Smooth transitions */
-  font-weight: 600; /* Slightly bolder font for emphasis */
+  font-weight: bold; /* bold font for emphasis */
   width: 20%;
 }
 
@@ -1216,6 +1216,11 @@ function toggleShowAssociatedAttributes() {
 
 .attribute-input {
   flex-shrink: 0;
+}
+
+.attribute-input-highlighted {
+  flex-shrink: 0;
+  color: #3acf4b;
 }
 
 button {
