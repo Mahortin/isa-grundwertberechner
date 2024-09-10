@@ -1062,13 +1062,19 @@ function toggleShowAssociatedAttributes() {
           v-if="!showOnlyIncreasedSkills || (showOnlyIncreasedSkills && skill.increased)"
           class="skill-info"
         >
-          <span class="skill-name" :class="[skill.increased ? 'highlighted' : '']">{{
-            skill.name
-          }}</span>
-          <span class="skill-value" :class="[skill.highestAt?.increased ? 'highlighted' : '']"
+          <span
+            class="skill-name"
+            :class="[skill.increased ? 'combatSkill-info-highlighted' : 'combatSkill-info']"
+            >{{ skill.name }}</span
+          >
+          <span
+            class="skill-value"
+            :class="[skill.highestAt?.increased ? 'attackOrBlock-highlighted' : 'attackOrBlock']"
             >AT: {{ skill.highestAt?.value }}</span
           >
-          <span class="skill-value" :class="[skill.highestPa?.increased ? 'highlighted' : '']"
+          <span
+            class="skill-value"
+            :class="[skill.highestPa?.increased ? 'attackOrBlock-highlighted' : 'attackOrBlock']"
             >PA: {{ skill.highestPa?.value }}</span
           >
           <span
@@ -1131,18 +1137,16 @@ function toggleShowAssociatedAttributes() {
   width: 100%;
 }
 
-.highlighted {
+.combatSkill-info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background-color: #3acf4b; /* Slightly darker greenish background on hover */
-  color: #713604; /* Change the font color to white when active */
-  border-radius: 8px; /* Rounded corners for a modern feel */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
-  transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease; /* Smooth transitions */
-  font-weight: 600; /* Slightly bolder font for emphasis */
+  width: 60%;
+}
+
+.attackOrBlock {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
 }
 
 .skill-info-highlighted {
@@ -1157,9 +1161,42 @@ function toggleShowAssociatedAttributes() {
     background-color 0.3s ease,
     box-shadow 0.3s ease; /* Smooth transitions */
   font-weight: 600; /* Slightly bolder font for emphasis */
+  width: 100%;
 }
 
-.skill-info-highlighted:hover {
+.combatSkill-info-highlighted {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3acf4b; /* Slightly darker greenish background on hover */
+  color: #713604; /* Change the font color to white when active */
+  border-radius: 8px; /* Rounded corners for a modern feel */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transitions */
+  font-weight: 600; /* Slightly bolder font for emphasis */
+  width: 60%;
+}
+
+.attackOrBlock-highlighted {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3acf4b; /* Slightly darker greenish background on hover */
+  color: #713604; /* Change the font color to white when active */
+  border-radius: 8px; /* Rounded corners for a modern feel */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transitions */
+  font-weight: 600; /* Slightly bolder font for emphasis */
+  width: 20%;
+}
+
+.skill-info-highlighted:hover,
+.combatSkill-info-highlighted:hover,
+.attackOrBlock-highlighted:hover {
   background-color: #51cf5f; /* Slightly darker blue on hover */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* More pronounced shadow on hover */
 }
@@ -1183,6 +1220,7 @@ function toggleShowAssociatedAttributes() {
 
 button {
   padding: 10px 20px;
+  margin: 10px;
   border: none;
   border-radius: 8px; /* Softer edges with rounded corners */
   background-color: #f8f2e8; /* Light gray background */
