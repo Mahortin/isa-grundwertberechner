@@ -3,6 +3,7 @@ import { ref, reactive, computed } from 'vue'
 
 const showOnlyIncreasedSkills = ref(false)
 const showAssociatedAttributes = ref(false)
+const showFormulas = ref(false)
 
 const attributes = reactive([
   { key: 'MU', name: 'Mut', value: 8, increased: false },
@@ -26,70 +27,80 @@ const skillGroups = reactive([
         name: 'Akrobatik',
         mapIsaAttributes: ['MU', 'GE', 'KK'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(MU + GE + KK) / 3'
       },
       {
         key: 'athletik',
         name: 'Athletik',
         mapIsaAttributes: ['GE', 'KO', 'KK'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(GE + KO + KK) / 3'
       },
       {
         key: 'diebeskunst',
         name: 'Diebeskunst',
         mapIsaAttributes: ['KL', 'IN', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + FF) / 3'
       },
       {
         key: 'heimlichkeit',
         name: 'Heimlichkeit',
         mapIsaAttributes: ['MU', 'IN', 'GE'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(MU + IN + GE) / 3'
       },
       {
         key: 'horchen',
         name: 'Horchen',
         mapIsaAttributes: ['KL', 'IN', 'KO'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + KO) / 3'
       },
       {
         key: 'klettern',
         name: 'Klettern',
         mapIsaAttributes: ['MU', 'GE', 'KK'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(MU + GE + KK) / 3'
       },
       {
         key: 'reiten',
         name: 'Reiten',
         mapIsaAttributes: ['CH', 'GE', 'KK'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(CH + GE + KK) / 3'
       },
       {
         key: 'schwimmen',
         name: 'Schwimmen',
         mapIsaAttributes: ['GE', 'KO', 'KK'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(GE + KO + KK) / 3'
       },
       {
         key: 'verborgenesErkennen',
         name: 'Verborgenes Erkennen',
         mapIsaAttributes: ['MU', 'KL', 'IN'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(MU + KL + IN) / 3'
       },
       {
         key: 'zechen',
         name: 'Zechen',
         mapIsaAttributes: ['IN', 'KO', 'KK'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(IN + KO + KK) / 3'
       }
     ]
   },
@@ -103,49 +114,56 @@ const skillGroups = reactive([
         name: 'Fährtensuche',
         mapIsaAttributes: ['KL', 'IN', 'KO'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + KO) / 3'
       },
       {
         key: 'fischenAngeln',
         name: 'Fischen & Angeln',
         mapIsaAttributes: ['IN', 'FF', 'KK'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(IN + FF + KK) / 3'
       },
       {
         key: 'himmelskunde',
         name: 'Himmelskunde',
         mapIsaAttributes: ['KL', 'IN', 'IN'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + IN) / 3'
       },
       {
         key: 'lagerRasten',
         name: 'Lager & Rasten',
         mapIsaAttributes: ['IN', 'GE', 'KO'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(IN + GE + KO) / 3'
       },
       {
         key: 'orientierung',
         name: 'Orientierung',
         mapIsaAttributes: ['KL', 'IN', 'IN'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + IN) / 3'
       },
       {
         key: 'pflanzenkunde',
         name: 'Pflanzenkunde',
         mapIsaAttributes: ['KL', 'IN', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + FF) / 3'
       },
       {
         key: 'tierkunde',
         name: 'Tierkunde',
         mapIsaAttributes: ['MU', 'KL', 'IN'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(MU + IN + IN) / 3'
       }
     ]
   },
@@ -159,70 +177,80 @@ const skillGroups = reactive([
         name: 'Alchemie',
         mapIsaAttributes: ['MU', 'KL', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(MU + KL + FF) / 3'
       },
       {
         key: 'bootSeefahrt',
         name: 'Boot- & Seefahrt',
         mapIsaAttributes: ['IN', 'GE', 'KO'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(IN + GE + KO) / 3'
       },
       {
         key: 'fahrzeugLenken',
         name: 'Fahrzeug lenken',
         mapIsaAttributes: ['IN', 'CH', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(IN + CH + FF) / 3'
       },
       {
         key: 'holzbearbeitung',
         name: 'Holzbearbeitung',
         mapIsaAttributes: ['KL', 'FF', 'KK'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + FF + KK) / 3'
       },
       {
         key: 'kochenBrauen',
         name: 'Kochen & Brauen',
         mapIsaAttributes: ['KL', 'FF', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + FF + FF) / 3'
       },
       {
         key: 'lehmSteinbearbeitung',
         name: 'Lehm- & Steinbearbeitung',
         mapIsaAttributes: ['KL', 'FF', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + FF + FF) / 3'
       },
       {
         key: 'malenZeichnen',
         name: 'Malen & Zeichnen',
         mapIsaAttributes: ['KL', 'IN', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + FF) / 3'
       },
       {
         key: 'musizieren',
         name: 'Musizieren',
         mapIsaAttributes: ['IN', 'CH', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(IN + CH + FF) / 3'
       },
       {
         key: 'schmiedekunst',
         name: 'Schmiedekunst',
         mapIsaAttributes: ['FF', 'KO', 'KK'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(FF + KO + KK) / 3'
       },
       {
         key: 'schneiderLederarbeiten',
         name: 'Schneider- & Lederarbeiten',
         mapIsaAttributes: ['KL', 'FF', 'KO'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + FF + KO) / 3'
       }
     ]
   },
@@ -236,49 +264,56 @@ const skillGroups = reactive([
         name: 'Einschüchtern',
         mapIsaAttributes: ['MU', 'CH', 'KK'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(MU + CH + KK) / 3'
       },
       {
         key: 'handel',
         name: 'Handel',
         mapIsaAttributes: ['KL', 'IN', 'CH'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + CH) / 3'
       },
       {
         key: 'schauspielerei',
         name: 'Schauspielerei',
         mapIsaAttributes: ['MU', 'KL', 'CH'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(MU + KL + CH) / 3'
       },
       {
         key: 'standeswissen',
         name: 'Standeswissen',
         mapIsaAttributes: ['KL', 'IN', 'CH'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + CH) / 3'
       },
       {
         key: 'tanzen',
         name: 'Tanzen',
         mapIsaAttributes: ['CH', 'GE', 'GE'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(CH + GE + GE) / 3'
       },
       {
         key: 'ueberreden',
         name: 'Überreden',
         mapIsaAttributes: ['MU', 'IN', 'CH'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(MU + IN + CH) / 3'
       },
       {
         key: 'ueberzeugen',
         name: 'Überzeugen',
         mapIsaAttributes: ['KL', 'IN', 'CH'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + CH) / 3'
       }
     ]
   },
@@ -292,77 +327,88 @@ const skillGroups = reactive([
         name: 'Architekt',
         mapIsaAttributes: ['KL', 'KL', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + KL + FF) / 3'
       },
       {
         key: 'geographie',
         name: 'Geographie',
         mapIsaAttributes: ['KL', 'KL', 'IN'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + KL + IN) / 3'
       },
       {
         key: 'geschichtswissen',
         name: 'Geschichtswissen',
         mapIsaAttributes: ['KL', 'KL', 'IN'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + KL + IN) / 3'
       },
       {
         key: 'goetterKulte',
         name: 'Götter & Kulte',
         mapIsaAttributes: ['KL', 'KL', 'IN'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + KL + IN) / 3'
       },
       {
         key: 'heilkundeGeist',
         name: '(Heil-)Kunde des Geistes',
         mapIsaAttributes: ['KL', 'IN', 'CH'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + CH) / 3'
       },
       {
         key: 'heilkundeKoerper',
         name: '(Heil-)Kunde des Körpers',
         mapIsaAttributes: ['KL', 'IN', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + FF) / 3'
       },
       {
         key: 'heilkundeSaefte',
         name: '(Heil-)Kunde der Säfte',
         mapIsaAttributes: ['KL', 'KL', 'IN'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + KL + IN) / 3'
       },
       {
         key: 'kriegskunst',
         name: 'Kriegskunst',
         mapIsaAttributes: ['MU', 'KL', 'CH'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(MU + KL + CH) / 3'
       },
       {
         key: 'magiekunde',
         name: 'Magiekunde',
         mapIsaAttributes: ['KL', 'KL', 'IN'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + KL + IN) / 3'
       },
       {
         key: 'rechnenPhysik',
         name: 'Rechnen & Physik',
         mapIsaAttributes: ['KL', 'IN', 'FF'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + IN + FF) / 3'
       },
       {
         key: 'rechtsStaatskunst',
         name: 'Rechts- & Staatskunst',
         mapIsaAttributes: ['KL', 'KL', 'IN'],
         value: 8,
-        increased: false
+        increased: false,
+        formula: '(KL + KL + IN) / 3'
       }
     ]
   }
@@ -380,45 +426,53 @@ const combatGroup = reactive({
       highestAt: {
         value: 8,
         mapIsaAttributes: ['MU', 'FF'],
-        increased: false
+        increased: false,
+        formula: '(MU + FF) / 2'
       },
       highestPa: {
         value: 8,
         mapIsaAttributes: ['IN', 'FF'],
-        increased: false
+        increased: false,
+        formula: '(IN + FF) / 2'
       },
       attackCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['MU', 'FF'],
-          increased: false
+          increased: false,
+          formula: '(MU + FF) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['MU', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(MU + GE) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['FF', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(FF + GE) / 2'
         }
       ],
       paCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['IN', 'FF'],
-          increased: false
+          increased: false,
+          formula: '(IN + FF) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['IN', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(IN + GE) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['FF', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(FF + GE) / 2'
         }
       ],
       increased: false
@@ -430,45 +484,53 @@ const combatGroup = reactive({
       highestAt: {
         value: 8,
         mapIsaAttributes: ['MU', 'KO'],
-        increased: false
+        increased: false,
+        formula: '(MU + KO) / 2'
       },
       highestPa: {
         value: 8,
         mapIsaAttributes: ['IN', 'KO'],
-        increased: false
+        increased: false,
+        formula: '(IN + KO) / 2'
       },
       attackCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['MU', 'KO'],
-          increased: false
+          increased: false,
+          formula: '(MU + KO) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['MU', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(MU + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['KO', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(KO + KK) / 2'
         }
       ],
       paCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['IN', 'KO'],
-          increased: false
+          increased: false,
+          formula: '(IN + KO) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['IN', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(IN + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['KO', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(KO + KK) / 2'
         }
       ],
       increased: false
@@ -480,45 +542,53 @@ const combatGroup = reactive({
       highestAt: {
         value: 8,
         mapIsaAttributes: ['MU', 'GE'],
-        increased: false
+        increased: false,
+        formula: '(MU + GE) / 2'
       },
       highestPa: {
         value: 8,
         mapIsaAttributes: ['IN', 'GE'],
-        increased: false
+        increased: false,
+        formula: '(IN + GE) / 2'
       },
       attackCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['MU', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(MU + GE) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['MU', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(MU + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['GE', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(GE + KK) / 2'
         }
       ],
       paCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['IN', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(IN + GE) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['IN', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(IN + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['GE', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(GE + KK) / 2'
         }
       ],
       increased: false
@@ -530,45 +600,53 @@ const combatGroup = reactive({
       highestAt: {
         value: 8,
         mapIsaAttributes: ['MU', 'GE'],
-        increased: false
+        increased: false,
+        formula: '(MU + GE) / 2'
       },
       highestPa: {
         value: 8,
         mapIsaAttributes: ['IN', 'GE'],
-        increased: false
+        increased: false,
+        formula: '(IN + GE) / 2'
       },
       attackCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['MU', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(MU + GE) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['MU', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(MU + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['GE', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(GE + KK) / 2'
         }
       ],
       paCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['IN', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(IN + GE) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['IN', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(IN + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['GE', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(GE + KK) / 2'
         }
       ],
       increased: false
@@ -580,45 +658,53 @@ const combatGroup = reactive({
       highestAt: {
         value: 8,
         mapIsaAttributes: ['MU', 'FF'],
-        increased: false
+        increased: false,
+        formula: '(MU + FF) / 2'
       },
       highestPa: {
         value: 8,
         mapIsaAttributes: ['IN', 'FF'],
-        increased: false
+        increased: false,
+        formula: '(IN + FF) / 2'
       },
       attackCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['MU', 'FF'],
-          increased: false
+          increased: false,
+          formula: '(MU + FF) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['MU', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(MU + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['FF', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(FF + KK) / 2'
         }
       ],
       paCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['IN', 'FF'],
-          increased: false
+          increased: false,
+          formula: '(IN + FF) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['IN', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(IN + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['FF', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(FF + KK) / 2'
         }
       ],
       increased: false
@@ -630,45 +716,53 @@ const combatGroup = reactive({
       highestAt: {
         value: 8,
         mapIsaAttributes: ['IN', 'FF'],
-        increased: false
+        increased: false,
+        formula: '(FF + KK) / 2'
       },
       highestPa: {
         value: 8,
         mapIsaAttributes: ['IN', 'FF'],
-        increased: false
+        increased: false,
+        formula: '(FF + KK) / 2'
       },
       attackCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['IN', 'FF'],
-          increased: false
+          increased: false,
+          formula: '(IN + FF) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['IN', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(IN + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['FF', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(FF + KK) / 2'
         }
       ],
       paCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['IN', 'FF'],
-          increased: false
+          increased: false,
+          formula: '(IN + FF) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['IN', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(IN + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['FF', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(FF + KK) / 2'
         }
       ],
       increased: false
@@ -680,45 +774,53 @@ const combatGroup = reactive({
       highestAt: {
         value: 8,
         mapIsaAttributes: ['FF', 'GE'],
-        increased: false
+        increased: false,
+        formula: '(FF + GE) / 2'
       },
       highestPa: {
         value: 8,
         mapIsaAttributes: ['FF', 'GE'],
-        increased: false
+        increased: false,
+        formula: '(FF + GE) / 2'
       },
       attackCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['FF', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(FF + GE) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['FF', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(FF + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['GE', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(GE + KK) / 2'
         }
       ],
       paCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['FF', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(FF + GE) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['FF', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(FF + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['GE', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(GE + KK) / 2'
         }
       ],
       increased: false
@@ -730,45 +832,53 @@ const combatGroup = reactive({
       highestAt: {
         value: 8,
         mapIsaAttributes: ['KL', 'IN'],
-        increased: false
+        increased: false,
+        formula: '(KL + IN) / 2'
       },
       highestPa: {
         value: 8,
         mapIsaAttributes: ['KL', 'IN'],
-        increased: false
+        increased: false,
+        formula: '(KL + IN) / 2'
       },
       attackCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['KL', 'IN'],
-          increased: false
+          increased: false,
+          formula: '(KL + IN) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['KL', 'FF'],
-          increased: false
+          increased: false,
+          formula: '(KL + FF) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['IN', 'FF'],
-          increased: false
+          increased: false,
+          formula: '(IN + FF) / 2'
         }
       ],
       paCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['KL', 'IN'],
-          increased: false
+          increased: false,
+          formula: '(KL + IN) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['KL', 'FF'],
-          increased: false
+          increased: false,
+          formula: '(KL + FF) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['IN', 'FF'],
-          increased: false
+          increased: false,
+          formula: '(IN + FF) / 2'
         }
       ],
       increased: false
@@ -780,45 +890,53 @@ const combatGroup = reactive({
       highestAt: {
         value: 8,
         mapIsaAttributes: ['FF', 'GE'],
-        increased: false
+        increased: false,
+        formula: '(FF + GE) / 2'
       },
       highestPa: {
         value: 8,
         mapIsaAttributes: ['FF', 'GE'],
-        increased: false
+        increased: false,
+        formula: '(FF + GE) / 2'
       },
       attackCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['FF', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(FF + GE) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['FF', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(FF + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['GE', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(GE + KK) / 2'
         }
       ],
       paCombinations: [
         {
           value: 8,
           mapIsaAttributes: ['FF', 'GE'],
-          increased: false
+          increased: false,
+          formula: '(FF + GE) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['FF', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(FF + KK) / 2'
         },
         {
           value: 8,
           mapIsaAttributes: ['GE', 'KK'],
-          increased: false
+          increased: false,
+          formula: '(GE + KK) / 2'
         }
       ],
       increased: false
@@ -837,7 +955,8 @@ const combinedAttributes = reactive({
       mapIsaAttributes: ['KO', 'KO', 'KK'],
       value: 8,
       divider: 3,
-      increased: false
+      increased: false,
+      formula: '(KO + KO + KO) / 3'
     },
     {
       key: 'mumm',
@@ -845,7 +964,8 @@ const combinedAttributes = reactive({
       mapIsaAttributes: ['MU', 'MU', 'KL'],
       value: 5,
       divider: 5,
-      increased: false
+      increased: false,
+      formula: '(MU + MU + KL) / 5'
     },
     {
       key: 'bewegung',
@@ -853,7 +973,8 @@ const combinedAttributes = reactive({
       mapIsaAttributes: ['GE', 'GE', 'IN'],
       value: 5,
       divider: 5,
-      increased: false
+      increased: false,
+      formula: '(GE + GE + IN) / 5'
     },
     {
       key: 'reflexe',
@@ -861,7 +982,8 @@ const combinedAttributes = reactive({
       mapIsaAttributes: ['KL', 'IN', 'GE'],
       value: 8,
       divider: 3,
-      increased: false
+      increased: false,
+      formula: '(KL + IN + GE) / 3'
     },
     {
       key: 'sprachbegabung',
@@ -869,7 +991,8 @@ const combinedAttributes = reactive({
       mapIsaAttributes: ['KL', 'IN', 'CH'],
       divider: 3,
       value: 8,
-      increased: false
+      increased: false,
+      formula: '(KL + IN + CH) / 3'
     }
   ]
 })
@@ -1005,6 +1128,10 @@ function toggleShowOnlyIncreasedSkills() {
 function toggleShowAssociatedAttributes() {
   showAssociatedAttributes.value = !showAssociatedAttributes.value
 }
+
+function toggleShowFormulas() {
+  showFormulas.value = !showFormulas.value
+}
 </script>
 
 <template>
@@ -1051,6 +1178,10 @@ function toggleShowAssociatedAttributes() {
         Talentattribute anzeigen
       </button>
 
+      <button :class="[showFormulas ? 'highlight-button' : '']" @click="toggleShowFormulas()">
+        Formeln anzeigen
+      </button>
+
       <!-- combined attributes -->
       <h2>
         {{ combinedAttributes.name }}
@@ -1068,6 +1199,7 @@ function toggleShowAssociatedAttributes() {
           <span v-if="showAssociatedAttributes" class="skill-attributes">{{
             skill.mapIsaAttributes
           }}</span>
+          <span v-if="showFormulas" class="skill-attributes">{{ skill.formula }}</span>
         </div>
       </div>
 
@@ -1104,6 +1236,12 @@ function toggleShowAssociatedAttributes() {
             :title="skill.mapIsaAttributes.toString()"
             >{{ skill.mapIsaAttributes }}</span
           >
+          <span class="skill-attributes" v-if="showFormulas"
+            >AT Formel: {{ skill.highestAt.formula }}</span
+          >
+          <span class="skill-attributes" v-if="showFormulas"
+            >PA Formel: {{ skill.highestPa.formula }}</span
+          >
         </div>
       </div>
 
@@ -1125,6 +1263,7 @@ function toggleShowAssociatedAttributes() {
             <span v-if="showAssociatedAttributes" class="skill-attributes">{{
               skill.mapIsaAttributes
             }}</span>
+            <span v-if="showFormulas" class="skill-attributes">{{ skill.formula }}</span>
           </div>
         </div>
       </div>
