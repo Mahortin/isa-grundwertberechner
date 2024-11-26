@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ExitStatus } from 'typescript'
 import { ref, reactive, computed } from 'vue'
 
 const showOnlyIncreasedSkills = ref(false)
@@ -997,7 +998,7 @@ const combinedAttributes = reactive({
   ]
 })
 
-function calcEverything(attribute) {
+function calcEverything(attribute: any) {
   // problem: last attribute to calc roudn wins if attribute is set or not
   attributes.forEach((attriubte) => {
     calcAssociatedSkills(attriubte.key)
@@ -1006,7 +1007,7 @@ function calcEverything(attribute) {
   })
 }
 
-function calcEverythingAssociated(key) {
+function calcEverythingAssociated(key: any) {
   calcAssociatedSkills(key)
   calcReferencedCombinedAttributes(key)
   calcAssociatedCombatSkills(key)
@@ -1046,11 +1047,12 @@ function calcAssociatedSkills(attributeKey: string) {
   })
 }
 
-function calcSkill(skill) {
+function calcSkill(skill: any) {
   var sum = 0
   var increasedAttributes = 0
   for (var index in skill.mapIsaAttributes) {
     var attribute = attributes.find((attribute) => attribute.key === skill.mapIsaAttributes[index])
+    if (attribute == undefined) throw ExitStatus
     increasedAttributes += attribute.increased ? 1 : 0
     sum += attribute.value
   }
@@ -1058,13 +1060,14 @@ function calcSkill(skill) {
   skill.increased = Math.round(increasedAttributes / 3) == 0 ? false : true
 }
 
-function calcCombinedAttribute(combAttr) {
+function calcCombinedAttribute(combAttr: any) {
   var increasedAttributes = 0
   var sum = 0
   for (var index in combAttr.mapIsaAttributes) {
     var attribute = attributes.find(
       (attribute) => attribute.key === combAttr.mapIsaAttributes[index]
     )
+    if (attribute == undefined) throw ExitStatus
     increasedAttributes += attribute.increased ? 1 : 0
     sum += attribute.value
   }
@@ -1074,13 +1077,13 @@ function calcCombinedAttribute(combAttr) {
     combAttr.value == Math.round((sum - increasedAttributes) / combAttr.divider) ? false : true
 }
 
-function calcCombatSkill(skill, attributeKey) {
+function calcCombatSkill(skill: any, attributeKey: any) {
   calculateHighestAttackOrBlock(skill.attackCombinations, attributeKey)
   calculateHighestAttackOrBlock(skill.paCombinations, attributeKey)
-  skill.attackCombinations.forEach((combination) => {
+  skill.attackCombinations.forEach((combination: any) => {
     skill.highestAt = skill.highestAt.value < combination.value ? combination : skill.highestAt
   })
-  skill.paCombinations.forEach((combination) => {
+  skill.paCombinations.forEach((combination: any) => {
     skill.highestPa = skill.highestPa.value < combination.value ? combination : skill.highestPa
   })
 
@@ -1088,18 +1091,19 @@ function calcCombatSkill(skill, attributeKey) {
   skill.increased = skill.highestAt.increased || skill.highestPa.increased ? true : false
 }
 
-function calculateHighestAttackOrBlock(combinations, attributeKey) {
+function calculateHighestAttackOrBlock(combinations: any, attributeKey: any) {
   var sum
   var increasedAttributes
   combinations
-    .filter((combination) => combination.mapIsaAttributes.includes(attributeKey))
-    .forEach((combination) => {
+    .filter((combination: any) => combination.mapIsaAttributes.includes(attributeKey))
+    .forEach((combination: any) => {
       sum = 0
       increasedAttributes = 0
       for (var index in combination.mapIsaAttributes) {
         var attribute = attributes.find(
           (attribute) => attribute.key === combination.mapIsaAttributes[index]
         )
+        if (attribute == undefined) throw ExitStatus
         increasedAttributes += attribute.increased ? 1 : 0
         sum += attribute.value
       }
@@ -1108,14 +1112,14 @@ function calculateHighestAttackOrBlock(combinations, attributeKey) {
     })
 }
 
-function increaseAttribute(attribute) {
+function increaseAttribute(attribute: any) {
   attribute.increased = !attribute.increased
   attribute.value = attribute.increased ? attribute.value + 1 : attribute.value - 1
   // calcEverythingAssociated(attribute.key)
   calcEverythingAssociated(attribute.key)
 }
 
-function setAttribute(attribute) {
+function setAttribute(attribute: any) {
   attribute.increased = false
   calcEverythingAssociated(attribute.key)
   calcEverythingAssociated(attribute.key)
